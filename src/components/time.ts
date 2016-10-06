@@ -1,0 +1,34 @@
+import { Component, OnInit, Input, EventEmitter, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { IntlService, LangChangeEvent, FormatService } from '../services';
+import { AbstractI18nComponent } from './abstractI18n';
+
+@Component({
+  selector: 'FormattedTime',
+  template: `<span>{{result}}</span>`
+})
+export class FormattedTimeComponent extends AbstractI18nComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() value: string;
+  @Input() format: string;
+  @Input() options: Object;
+
+  constructor(intlService: IntlService, formatService: FormatService) {
+    super(intlService, formatService);
+  }
+
+  updateValue(): void {
+    const props = Object.assign({},
+      {
+        format: this.format,
+      },
+      this.options
+    );
+
+    this.result = this.formatService.formatTime(this.value, props);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['value'] || changes['format'] || changes['options']) {
+      this.updateValue();
+    }
+  }
+}
