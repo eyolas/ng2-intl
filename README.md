@@ -4,7 +4,6 @@ Ng2 Intl
 Internationalize [Angular2][] apps. This library provides angular2 components, pipe and an API to format dates, numbers, and strings, including pluralization and handling translations.
 
 [![npm Version][npm-badge]][npm]
-[![Build Status][travis-badge]][travis]
 [![Dependency Status][david-badge]][david]
 
 Overview
