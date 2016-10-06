@@ -32,7 +32,7 @@
     "url": "git+https://github.com/eyolas/ng2-intl.git"
   },
   "author": "David Touzet <dtouzet@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/eyolas/ng2-intl/issues"
   },
