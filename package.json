@@ -20,7 +20,8 @@
     "dist",
     "src"
   ],
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc || true",
