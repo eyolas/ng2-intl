@@ -9,7 +9,7 @@ Internationalize [Angular2][] apps. This library provides angular2 components, p
 Overview
 --------
 
-**Ng2 Intl is part of [FormatJS][].** It provides bindings to angular 2 via its components, pipe and API.
+**Ng2 Intl use [FormatJS][].** It provides bindings to angular 2 via its components, pipe and API.
 
 ### Features
 
@@ -28,7 +28,7 @@ Overview
 [david-badge]: https://img.shields.io/david/eyolas/ng2-intl.svg?style=flat-square
 [travis]: https://travis-ci.org/eyolas/ng2-intl
 [travis-badge]: https://img.shields.io/travis/eyolas/ng2-intl/master.svg?style=flat-square
-[React]: http://facebook.github.io/react/
+[Angular2]: https://angular.io/
 [FormatJS]: http://formatjs.io/
 [FormatJS GitHub]: http://formatjs.io/github/
 [Documentation]: https://github.com/eyolas/ng2-intl/wiki
