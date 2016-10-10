@@ -120,7 +120,6 @@ export class IntlService {
     this.pending.subscribe((res: Object) => {
       this.messages[lang] = res;
       this.updateLangs();
-      console.log('this.messages', this.messages);
     }, (err: any) => {
       throw err;
     }, () => {
