@@ -1,6 +1,6 @@
 {
   "name": "ng2-intl",
-  "version": "1.0.0-rc.4",
+  "version": "1.0.0-rc.5",
   "description": "Internationalize Angular2 apps. This library provides Angular2 components, pipe and an API to format dates, numbers, and strings, including pluralization and handling translations.",
   "keywords": [
     "intl",
@@ -27,7 +27,8 @@
     "clean": "rimraf dist/ lib/ locale-data/ src/en.js src/en.d.ts",
     "prebuild": "npm run clean",
     "build": "npm run build:data && npm run build:dist",
-    "build:dist": "tsc",
+    "copy": "cp src/{en.js,en.d.ts} dist/",
+    "build:dist": "tsc && npm run copy",
     "build:data": "ts-node -P scripts/tsconfig.json scripts/build-data",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run build"
