@@ -34,7 +34,6 @@ export default ${serialize(localeData)};
 }
 
 function writeUMDFile(filename, module) {
-  console.log(module);
     const lang = p.basename(filename, '.js');
 
     return rollup({
