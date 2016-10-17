@@ -7,7 +7,7 @@
 import IntlMessageFormat from 'intl-messageformat';
 import IntlRelativeFormat from 'intl-relativeformat';
 
-export function addLocaleData(data = []) {
+export function addLocaleData(data: any = []) {
     let locales = Array.isArray(data) ? data : [data];
 
     locales.forEach((localeData) => {
