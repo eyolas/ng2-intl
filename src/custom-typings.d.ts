@@ -76,7 +76,7 @@ declare module 'intl-messageformat' {
     (message: string, locales?: string | string[], formats?: IntlMessageFormatOptions): IntlMessageFormat;
 
     __addLocaleData: (localStorage: any) => void;
-    __localeData__: {};
+    __localeData__: { [k: string]: any };
   }
 
   const IntlMessageFormat: IntlMessageFormatConstructor;
@@ -84,9 +84,17 @@ declare module 'intl-messageformat' {
   export = IntlMessageFormat;
 }
 
+interface Thresholds {
+  second: number,  // seconds to minute
+  minute: number,  // minutes to hour
+  hour: number,  // hours to day
+  day: number,  // days to month
+  month: number   // months to year
+}
+
 declare module 'intl-relativeformat' {
   interface IntlRelativeFormat {
-    format(values?: any, options?: {now?: number | Date}): string;
+    format(values?: any, options?: { now?: number | Date }): string;
     resolvedOptions(): { locale: string };
   }
 
@@ -102,15 +110,9 @@ declare module 'intl-relativeformat' {
 
     __addLocaleData: (localStorage: any) => void;
 
-    __localeData__: {};
+    __localeData__: { [k: string]: any };
 
-    thresholds: {
-      second: number,  // seconds to minute
-      minute: number,  // minutes to hour
-      hour: number,  // hours to day
-      day: number,  // days to month
-      month: number   // months to year
-    }
+    thresholds: Thresholds
   }
 
   const IntlRelativeFormat: IntlRelativeFormatConstructor;

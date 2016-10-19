@@ -4,7 +4,7 @@ import { AbstractI18nComponent } from './abstractI18n';
 
 @Component({
   selector: 'FormattedDate',
-  template: `<span>{{result}}</span>`
+  template: `{{result}}`
 })
 export class FormattedDateComponent extends AbstractI18nComponent implements OnInit, OnDestroy, OnChanges {
   @Input() value: string;

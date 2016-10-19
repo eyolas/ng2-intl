@@ -2,12 +2,14 @@ import { Component, OnInit, Input, EventEmitter, OnDestroy, OnChanges, SimpleCha
 import { IntlService, LangChangeEvent, FormatService } from '../services';
 import { AbstractI18nComponent } from './abstractI18n';
 
+
 @Component({
   selector: 'FormattedMessage',
-  template: `<span>{{result}}</span>`
+  template: `{{result}}`
 })
 export class FormattedMessageComponent extends AbstractI18nComponent implements OnInit, OnDestroy, OnChanges {
   @Input() id: string;
+  @Input() defaultMessage: string;
   @Input() values: Object;
 
   constructor(intlService: IntlService, formatService: FormatService) {
@@ -15,13 +17,9 @@ export class FormattedMessageComponent extends AbstractI18nComponent implements 
    }
 
   updateValue(): void {
-    this.intlService.get(this.id).subscribe((msg: string) => {
-      if (msg !== undefined) {
-        this.result = this.formatService.formatMessage(msg, this.values);
-      } else {
-        this.result = this.id;
-      }
-    });
+     let { id, defaultMessage } = this;
+    this.formatService.formatMessage({ id, defaultMessage }, this.values)
+      .subscribe((msg: string) => this.result = msg);
   }
 
   ngOnChanges(changes: SimpleChanges) {

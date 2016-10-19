@@ -4,7 +4,7 @@ import { AbstractI18nComponent } from './abstractI18n';
 
 @Component({
   selector: 'FormattedNumber',
-  template: `<span>{{result}}</span>`
+  template: `{{result}}`
 })
 export class FormattedNumberComponent extends AbstractI18nComponent implements OnInit, OnDestroy, OnChanges {
   @Input() value: number;

@@ -18,7 +18,7 @@ export function addLocaleData(data: any = []) {
     });
 }
 
-export function hasLocaleData(locale) {
+export function hasLocaleData(locale: string): boolean {
     let localeParts = (locale || '').split('-');
 
     while (localeParts.length > 0) {
@@ -32,7 +32,7 @@ export function hasLocaleData(locale) {
     return false;
 }
 
-function hasIMFAndIRFLocaleData(locale) {
+function hasIMFAndIRFLocaleData(locale: string): boolean {
     let normalizedLocale = locale && locale.toLowerCase();
 
     return !!(

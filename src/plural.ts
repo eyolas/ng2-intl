@@ -7,12 +7,12 @@
 // This is a "hack" until a proper `intl-pluralformat` package is created.
 import IntlMessageFormat from 'intl-messageformat';
 
-function resolveLocale(locales) {
+function resolveLocale(locales: string | string[]) {
   // IntlMessageFormat#_resolveLocale() does not depend on `this`.
   return IntlMessageFormat.prototype._resolveLocale(locales);
 }
 
-function findPluralFunction(locale) {
+function findPluralFunction(locale: string) {
   // IntlMessageFormat#_findPluralFunction() does not depend on `this`.
   return IntlMessageFormat.prototype._findPluralRuleFunction(locale);
 }
@@ -22,14 +22,14 @@ export interface IntlPluralFormat {
 }
 
 export interface IntlPluralFormatConstructor {
-  new (locales, options: { style?: string }): IntlPluralFormat
-  (locales, options: { style?: string }): IntlPluralFormat
+  new (locales: string | string[], options: { style?: string }): IntlPluralFormat
+  (locales: string | string[], options: { style?: string }): IntlPluralFormat
 }
 
 export class IntlPluralFormatImpl {
   format: (values?: any) => string;
 
-  constructor(locales, options: { style?: string } = {}) {
+  constructor(locales: string | string[], options: { style?: string } = {}) {
     let useOrdinal = options.style === 'ordinal';
     let pluralFn = findPluralFunction(resolveLocale(locales));
 

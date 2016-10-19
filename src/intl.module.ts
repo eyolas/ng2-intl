@@ -8,8 +8,8 @@ export function i18nLoaderFactory(http: Http) {
   return new IntlStaticLoader(http);
 }
 
-const PIPES = Object.keys(pipes).map(k => pipes[k]);
-const COMPONENTS = Object.keys(components).map(k => components[k]);
+const PIPES: any[] = Object.keys(pipes).map((k: string) => (pipes as any)[k]);
+const COMPONENTS = Object.keys(components).map((k: string) => (components as any)[k]);
 
 @NgModule({
   imports: [HttpModule],

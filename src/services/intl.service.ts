@@ -205,7 +205,8 @@ export class IntlService {
   public getConfig() {
     return {
       locale: this.currentLang,
-      formats: this.defaultFormat
+      formats: this.defaultFormat,
+      defaultLocale: this.defaultLang
     }
   }
 

@@ -1,9 +1,10 @@
 import { PipeTransform, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { IntlService, LangChangeEvent, FormatService } from '../services';
+import { MessageDescriptor } from '../interfaces';
 
 export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   value: string = '';
-  lastKey: string;
+  lastKey: string | MessageDescriptor;
   lastParams: any[];
   onLangChange: EventEmitter<LangChangeEvent>;
 
@@ -64,10 +65,10 @@ export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   }
   /* tslint:enable */
 
-  abstract updateValue(key: string, interpolateParams?: Object, options?: Object): void;
+  abstract updateValue(key: string | MessageDescriptor, interpolateParams?: Object, options?: Object): void;
 
-  transform(query: string, ...args: any[]): any {
-    if (!query || query.length === 0) {
+  transform(query: string | MessageDescriptor, ...args: any[]): any {
+    if (!query || (typeof query === "string" && query.length === 0) || (typeof query === "object" && !query.id)) {
       return query;
     }
     // if we ask another time for the same key, return the last value

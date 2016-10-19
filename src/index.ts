@@ -4,6 +4,7 @@ export * from './services';
 export * from './locale-data-registry';
 
 export * from './intl.module';
+export * from './interfaces';
 
 
 import defaultLocaleData from './en';

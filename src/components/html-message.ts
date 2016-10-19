@@ -8,6 +8,7 @@ import { AbstractI18nComponent } from './abstractI18n';
 })
 export class FormattedHtmlMessageComponent extends AbstractI18nComponent implements OnInit, OnDestroy, OnChanges {
   @Input() id: string;
+  @Input() defaultMessage: string;
   @Input() values: Object;
 
   constructor(intlService: IntlService, formatService: FormatService) {
@@ -15,13 +16,9 @@ export class FormattedHtmlMessageComponent extends AbstractI18nComponent impleme
    }
 
   updateValue(): void {
-    this.intlService.get(this.id).subscribe((msg: string) => {
-      if (msg !== undefined) {
-        this.result = this.formatService.formatHTMLMessage(msg, this.values);
-      } else {
-        this.result = this.id;
-      }
-    });
+    let { id, defaultMessage } = this;
+    this.formatService.formatHTMLMessage({ id, defaultMessage }, this.values)
+      .subscribe((msg: string) => this.result = msg);
   }
 
   ngOnChanges(changes: SimpleChanges) {

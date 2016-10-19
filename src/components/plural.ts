@@ -4,7 +4,7 @@ import { AbstractI18nComponent } from './abstractI18n';
 
 @Component({
   selector: 'FormattedPlural',
-  template: `<span>{{result}}</span>`
+  template: `{{result}}`
 })
 export class FormattedPluralComponent extends AbstractI18nComponent implements OnInit, OnDestroy, OnChanges {
   @Input() value: string;
@@ -21,7 +21,7 @@ export class FormattedPluralComponent extends AbstractI18nComponent implements O
   }
 
   updateValue(): void {
-    const props = Object.assign({},
+    const props: {[k: string]: any} = Object.assign({},
       {
         other: this.other,
         zero: this.zero,
