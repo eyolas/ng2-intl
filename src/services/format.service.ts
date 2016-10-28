@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { IntlService } from './intl.service';
 import { DATE_TIME_FORMAT_OPTIONS, RELATIVE_FORMAT_OPTIONS, RELATIVE_FORMAT_THRESHOLDS, NUMBER_FORMAT_OPTIONS, PLURAL_FORMAT_OPTIONS } from './format';
 import { MessageDescriptor, DateTimeFormatOptions, NumberFormatOptions, PluralFormatOptions, RelativeFormatOptions } from '../interfaces';
+import { debug } from '../debug';
 
 
 function updateRelativeFormatThresholds(newThresholds: Thresholds) {
@@ -27,7 +28,7 @@ function getNamedFormat(formats: any, type: string, name: string) {
   }
 
   if (process.env.NODE_ENV !== 'production') {
-    console.error(
+    debug(
       `[Ng2 Intl] No ${type} format named: ${name}`
     );
   }
@@ -50,7 +51,7 @@ export class FormatService {
       return formatters.getDateTimeFormat(locale, filteredOptions).format(date);
     } catch (e) {
       if (process.env.NODE_ENV !== 'production') {
-        console.error(
+        debug(
           `[Ng2 Intl] Error formatting date.\n${e}`
         );
       }
@@ -59,7 +60,7 @@ export class FormatService {
     return String(date);
   }
 
-  formatTime(value: any, options: DateTimeFormatOptions & {format?: string}= {}): string {
+  formatTime(value: any, options: DateTimeFormatOptions & { format?: string } = {}): string {
     const {locale, formats} = this.intlService.getConfig();
     const {format} = options;
 
@@ -81,7 +82,7 @@ export class FormatService {
       return formatters.getDateTimeFormat(locale, filteredOptions).format(date);
     } catch (e) {
       if (process.env.NODE_ENV !== 'production') {
-        console.error(
+        debug(
           `[Ng2 Intl] Error formatting time.\n${e}`
         );
       }
@@ -91,9 +92,9 @@ export class FormatService {
   }
 
   formatRelative(value: any, options: RelativeFormatOptions & {
-        format?: string,
-        now?: any
-    } = {}): string {
+    format?: string,
+    now?: any
+  } = {}): string {
     const {formats, locale} = this.intlService.getConfig();
     const {format} = options;
 
@@ -113,7 +114,7 @@ export class FormatService {
       });
     } catch (e) {
       if (process.env.NODE_ENV !== 'production') {
-        console.error(
+        debug(
           `[Ng2 Intl] Error formatting relative time.\n${e}`
         );
       }
@@ -135,7 +136,7 @@ export class FormatService {
       return formatters.getNumberFormat(locale, filteredOptions).format(value);
     } catch (e) {
       if (process.env.NODE_ENV !== 'production') {
-        console.error(
+        debug(
           `[Ng2 Intl] Error formatting number.\n${e}`
         );
       }
@@ -153,7 +154,7 @@ export class FormatService {
       return formatters.getPluralFormat.bind(null)(locale, filteredOptions).format(value);
     } catch (e) {
       if (process.env.NODE_ENV !== 'production') {
-        console.error(
+        debug(
           `[Ng2 Intl] Error formatting plural.\n${e}`
         );
       }
@@ -196,7 +197,7 @@ export class FormatService {
               formattedMessage = formatter.format(values);
             } catch (e) {
               if (process.env.NODE_ENV !== 'production') {
-                console.error(
+                debug(
                   `[Ng2 Intl] Error formatting message: "${id}" for locale: "${locale}"` +
                   (defaultMessage ? ', using default message as fallback.' : '') +
                   `\n${e}`
@@ -211,7 +212,7 @@ export class FormatService {
               if (!defaultMessage ||
                 (locale && locale.toLowerCase() !== defaultLocale.toLowerCase())) {
 
-                console.error(
+                debug(
                   `[Ng2 Intl] Missing message: "${id}" for locale: "${locale}"` +
                   (defaultMessage ? ', using default message as fallback.' : '')
                 );
@@ -228,7 +229,7 @@ export class FormatService {
               formattedMessage = formatter.format(values);
             } catch (e) {
               if (process.env.NODE_ENV !== 'production') {
-                console.error(
+                debug(
                   `[Ng2 Intl] Error formatting the default message for: "${id}"` +
                   `\n${e}`
                 );
@@ -238,7 +239,7 @@ export class FormatService {
 
           if (!formattedMessage) {
             if (process.env.NODE_ENV !== 'production') {
-              console.error(
+              debug(
                 `[Ng2 Intl] Cannot format message: "${id}", ` +
                 `using message ${message || defaultMessage ? 'source' : 'id'} as fallback.`
               );
@@ -257,11 +258,11 @@ export class FormatService {
     // ).format(values);
   }
 
-  formatHTMLMessage(descriptor: MessageDescriptor, rawValues: {[k: string]: any} = {}): Observable<string> {
+  formatHTMLMessage(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): Observable<string> {
     // Process all the values before they are used when formatting the ICU
     // Message string. Since the formatted message might be injected via
     // `innerHTML`, all String-based values need to be HTML-escaped.
-    let escapedValues = Object.keys(rawValues).reduce<{[k: string]: any}>((escaped, name) => {
+    let escapedValues = Object.keys(rawValues).reduce<{ [k: string]: any }>((escaped, name) => {
       let value = rawValues[name];
       escaped[name] = typeof value === 'string' ? escape(value) : value;
       return escaped;

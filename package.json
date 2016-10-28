@@ -70,5 +70,8 @@
     "ts-node": "^1.6.0",
     "typescript": "^2.0.3",
     "zone.js": "^0.6.25"
+  },
+  "optionalDependencies": {
+    "debug": "^2.2.0"
   }
 }

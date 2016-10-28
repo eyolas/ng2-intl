@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
 import { IntlLoader, IntlStaticLoader } from './intl.loader';
 import * as format from './format.service';
+import { debug } from '../debug';
 
 import "rxjs/add/observable/of";
 import "rxjs/add/operator/share";
@@ -186,7 +187,7 @@ export class IntlService {
           res = this.messages[this.defaultLang][key];
 
           if (process.env.NODE_ENV !== 'production') {
-            console.error(
+            debug(
               `[Ng Intl] Error formatting message: "${key}" for locale: "${this.currentLang}", using default message as fallback.`
             );
           };
