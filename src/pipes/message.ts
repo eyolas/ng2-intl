@@ -24,7 +24,7 @@ export class FormattedMessagePipe extends AbstractI18nPipe {
     }
 
     this.formatService
-      .formatMessage(descriptor, values)
+      .formatMessageAsync(descriptor, values)
       .subscribe((msg: string) => {
         this.value = msg;
         this.lastKey = descriptor;

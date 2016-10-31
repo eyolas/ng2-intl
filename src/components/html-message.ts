@@ -17,7 +17,7 @@ export class FormattedHtmlMessageComponent extends AbstractI18nComponent impleme
 
   updateValue(): void {
     let { id, defaultMessage } = this;
-    this.formatService.formatHTMLMessage({ id, defaultMessage }, this.values)
+    this.formatService.formatHTMLMessageAsync({ id, defaultMessage }, this.values)
       .subscribe((msg: string) => this.result = msg);
   }
 

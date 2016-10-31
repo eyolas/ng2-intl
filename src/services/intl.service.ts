@@ -162,7 +162,7 @@ export class IntlService {
      * @param key
      * @returns {any} the translated key
      */
-  public get(key: string): Observable<string | any> {
+  public getAsync(key: string): Observable<string | any> {
     if (!key) {
       throw new Error(`Parameter "key" required`);
     }
@@ -201,6 +201,34 @@ export class IntlService {
         observer.complete();
       });
     })
+  }
+
+  /**
+    * Gets the message of a key
+    * @param key
+    * @returns {any} the translated key
+    */
+  public get(key: string): string {
+    if (!key) {
+      throw new Error(`Parameter "key" required`);
+    }
+
+    let res = this.messages[this.currentLang][key];
+    if (typeof res === "undefined" && this.defaultLang && this.defaultLang !== this.currentLang) {
+      res = this.messages[this.defaultLang][key];
+
+      if (process.env.NODE_ENV !== 'production') {
+        debug(
+          `[Ng Intl] Error formatting message: "${key}" for locale: "${this.currentLang}", using default message as fallback.`
+        );
+      };
+    }
+
+    if (!res && this.missingTranslationHandler) {
+      res = this.missingTranslationHandler.handle(key);
+    }
+
+    return res;
   }
 
   public getConfig() {

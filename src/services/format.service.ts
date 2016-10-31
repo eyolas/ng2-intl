@@ -163,7 +163,31 @@ export class FormatService {
     return 'other';
   }
 
-  formatMessage(descriptor: MessageDescriptor, values = {}): Observable<string> {
+  formatMessageAsync(descriptor: MessageDescriptor, values = {}): Observable<string> {
+    let {
+      id
+    } = descriptor;
+
+    return Observable.create((observer: Observer<string>) => {
+      this.intlService.getAsync(id)
+        .subscribe((message: string) => {
+          observer.next(this.processFormatMessage(message, descriptor, values));
+          observer.complete();
+        });
+    });
+  }
+
+
+  formatMessage(descriptor: MessageDescriptor, values = {}): string {
+    let {
+      id
+    } = descriptor;
+
+      let message = this.intlService.get(id);
+      return this.processFormatMessage(message, descriptor, values);
+  }
+
+  private processFormatMessage(message: string, descriptor: MessageDescriptor, values = {}): string {
     const {
       formats,
       locale,
@@ -174,91 +198,88 @@ export class FormatService {
       id,
       defaultMessage
     } = descriptor;
+    const hasValues = Object.keys(values).length > 0;
 
-    return Observable.create((observer: Observer<string>) => {
-      this.intlService.get(id)
-        .subscribe((message: string) => {
-          const hasValues = Object.keys(values).length > 0;
+    // Avoid expensive message formatting for simple messages without values. In
+    // development messages will always be formatted in case of missing values.
+    if (!hasValues && process.env.NODE_ENV === 'production') {
+      return message || defaultMessage || id;
+    }
 
-          // Avoid expensive message formatting for simple messages without values. In
-          // development messages will always be formatted in case of missing values.
-          if (!hasValues && process.env.NODE_ENV === 'production') {
-            return message || defaultMessage || id;
-          }
+    let formattedMessage: string;
 
-          let formattedMessage: string;
+    if (message) {
+      try {
+        let formatter = formatters.getMessageFormat(
+          message, locale, formats
+        );
 
-          if (message) {
-            try {
-              let formatter = formatters.getMessageFormat(
-                message, locale, formats
-              );
+        formattedMessage = formatter.format(values);
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') {
+          debug(
+            `[Ng2 Intl] Error formatting message: "${id}" for locale: "${locale}"` +
+            (defaultMessage ? ', using default message as fallback.' : '') +
+            `\n${e}`
+          );
+        }
+      }
+    } else {
+      if (process.env.NODE_ENV !== 'production') {
+        // This prevents warnings from littering the console in development
+        // when no `messages` are passed into the <IntlProvider> for the
+        // default locale, and a default message is in the source.
+        if (!defaultMessage ||
+          (locale && locale.toLowerCase() !== defaultLocale.toLowerCase())) {
 
-              formattedMessage = formatter.format(values);
-            } catch (e) {
-              if (process.env.NODE_ENV !== 'production') {
-                debug(
-                  `[Ng2 Intl] Error formatting message: "${id}" for locale: "${locale}"` +
-                  (defaultMessage ? ', using default message as fallback.' : '') +
-                  `\n${e}`
-                );
-              }
-            }
-          } else {
-            if (process.env.NODE_ENV !== 'production') {
-              // This prevents warnings from littering the console in development
-              // when no `messages` are passed into the <IntlProvider> for the
-              // default locale, and a default message is in the source.
-              if (!defaultMessage ||
-                (locale && locale.toLowerCase() !== defaultLocale.toLowerCase())) {
+          debug(
+            `[Ng2 Intl] Missing message: "${id}" for locale: "${locale}"` +
+            (defaultMessage ? ', using default message as fallback.' : '')
+          );
+        }
+      }
+    }
 
-                debug(
-                  `[Ng2 Intl] Missing message: "${id}" for locale: "${locale}"` +
-                  (defaultMessage ? ', using default message as fallback.' : '')
-                );
-              }
-            }
-          }
+    if (!formattedMessage && defaultMessage) {
+      try {
+        let formatter = formatters.getMessageFormat(
+          defaultMessage, defaultLocale, formats
+        );
 
-          if (!formattedMessage && defaultMessage) {
-            try {
-              let formatter = formatters.getMessageFormat(
-                defaultMessage, defaultLocale, formats
-              );
+        formattedMessage = formatter.format(values);
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') {
+          debug(
+            `[Ng2 Intl] Error formatting the default message for: "${id}"` +
+            `\n${e}`
+          );
+        }
+      }
+    }
 
-              formattedMessage = formatter.format(values);
-            } catch (e) {
-              if (process.env.NODE_ENV !== 'production') {
-                debug(
-                  `[Ng2 Intl] Error formatting the default message for: "${id}"` +
-                  `\n${e}`
-                );
-              }
-            }
-          }
+    if (!formattedMessage) {
+      if (process.env.NODE_ENV !== 'production') {
+        debug(
+          `[Ng2 Intl] Cannot format message: "${id}", ` +
+          `using message ${message || defaultMessage ? 'source' : 'id'} as fallback.`
+        );
+      }
+    }
 
-          if (!formattedMessage) {
-            if (process.env.NODE_ENV !== 'production') {
-              debug(
-                `[Ng2 Intl] Cannot format message: "${id}", ` +
-                `using message ${message || defaultMessage ? 'source' : 'id'} as fallback.`
-              );
-            }
-          }
-
-          observer.next(formattedMessage || message || defaultMessage || id);
-          observer.complete();
-        });
-    });
-
-
-
-    // return formatters.getMessageFormat(
-    //   message, locale, formats
-    // ).format(values);
+    return formattedMessage || message || defaultMessage || id;
   }
 
-  formatHTMLMessage(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): Observable<string> {
+  formatHTMLMessage(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): string {
+    let escapedValues = this.escapeValues(rawValues);
+    return this.formatMessage(descriptor, escapedValues);
+  }
+
+  formatHTMLMessageAsync(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): Observable<string> {
+    let escapedValues = this.escapeValues(rawValues);
+    return this.formatMessageAsync(descriptor, escapedValues);
+  }
+
+  private escapeValues(rawValues: { [k: string]: any } = {}) {
     // Process all the values before they are used when formatting the ICU
     // Message string. Since the formatted message might be injected via
     // `innerHTML`, all String-based values need to be HTML-escaped.
@@ -268,6 +289,8 @@ export class FormatService {
       return escaped;
     }, {});
 
-    return this.formatMessage(descriptor, escapedValues);
+    return rawValues;
   }
+
+
 }
