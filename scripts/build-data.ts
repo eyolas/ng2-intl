@@ -1,11 +1,11 @@
 import * as fs from 'fs';
 import * as p from 'path';
-var mkdirpSync = require('mkdirp').sync;
-var extractCLDRData = require('formatjs-extract-cldr-data');
-var serialize = require('serialize-javascript');
-var rollup = require('rollup').rollup;
-var memory = require('rollup-plugin-memory');
-var uglify = require('rollup-plugin-uglify');
+let mkdirpSync = require('mkdirp').sync;
+let extractCLDRData = require('formatjs-extract-cldr-data');
+let serialize = require('serialize-javascript');
+let rollup = require('rollup').rollup;
+let memory = require('rollup-plugin-memory');
+let uglify = require('rollup-plugin-uglify');
 
 
 const DEFAULT_LOCALE = 'en';
@@ -82,13 +82,13 @@ export default lang;
 const allData = createDataModule(Array.from(cldrDataByLocale.values()));
 writeUMDFile('locale-data/index.js', allData);
 
-cldrDataByLang.forEach((cldrData, lang) => {
-    writeUMDFile(`locale-data/${lang}.js`, createDataModule(cldrData));
+cldrDataByLang.forEach((data, lang) => {
+    writeUMDFile(`locale-data/${lang}.js`, createDataModule(data));
     writeFile(`locale-data/${lang}.d.ts`, `
 declare var lang: any;
 export default lang;
 `);
 });
 
-process.on('unhandledRejection', (reason) => {throw reason;});
+process.on('unhandledRejection', (reason) => { throw reason; });
 console.log('Writing locale data files...');
