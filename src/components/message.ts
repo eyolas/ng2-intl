@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { IntlService, LangChangeEvent, FormatService } from '../services';
+import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { IntlService, FormatService } from '../services';
 import { AbstractI18nComponent } from './abstractI18n';
 
 

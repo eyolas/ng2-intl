@@ -1,11 +1,17 @@
 import IntlRelativeFormat from 'intl-relativeformat';
 import * as formatters from '../formatters';
 import { escape, filterProps } from '../utils';
-import { Observable } from "rxjs/Observable";
-import { Observer } from "rxjs/Observer";
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { Injectable } from '@angular/core';
 import { IntlService } from './intl.service';
-import { DATE_TIME_FORMAT_OPTIONS, RELATIVE_FORMAT_OPTIONS, RELATIVE_FORMAT_THRESHOLDS, NUMBER_FORMAT_OPTIONS, PLURAL_FORMAT_OPTIONS } from './format';
+import {
+  DATE_TIME_FORMAT_OPTIONS,
+  RELATIVE_FORMAT_OPTIONS,
+  RELATIVE_FORMAT_THRESHOLDS,
+  NUMBER_FORMAT_OPTIONS,
+  PLURAL_FORMAT_OPTIONS
+} from './format';
 import { MessageDescriptor, DateTimeFormatOptions, NumberFormatOptions, PluralFormatOptions, RelativeFormatOptions } from '../interfaces';
 import { debug } from '../debug';
 
@@ -283,13 +289,11 @@ export class FormatService {
     // Process all the values before they are used when formatting the ICU
     // Message string. Since the formatted message might be injected via
     // `innerHTML`, all String-based values need to be HTML-escaped.
-    let escapedValues = Object.keys(rawValues).reduce<{ [k: string]: any }>((escaped, name) => {
+    return Object.keys(rawValues).reduce<{ [k: string]: any }>((escaped, name) => {
       let value = rawValues[name];
       escaped[name] = typeof value === 'string' ? escape(value) : value;
       return escaped;
     }, {});
-
-    return rawValues;
   }
 
 

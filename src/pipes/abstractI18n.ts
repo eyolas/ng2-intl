@@ -68,7 +68,7 @@ export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   abstract updateValue(key: string | MessageDescriptor, interpolateParams?: Object, options?: Object): void;
 
   transform(query: string | MessageDescriptor, ...args: any[]): any {
-    if (!query || (typeof query === "string" && query.length === 0) || (typeof query === "object" && !query.id)) {
+    if (!query || (typeof query === 'string' && query.length === 0) || (typeof query === 'object' && !query.id)) {
       return query;
     }
     // if we ask another time for the same key, return the last value
@@ -76,12 +76,12 @@ export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
       return this.value;
     }
 
-    var interpolateParams: Object;
+    let interpolateParams: Object;
     if (args.length && args[0] !== null && typeof args[0] === 'object' && !Array.isArray(args[0])) {
       interpolateParams = args[0];
     }
 
-    var options: Object;
+    let options: Object;
     if (args.length && args[1] !== null && typeof args[1] === 'object' && !Array.isArray(args[1])) {
       options = args[1];
     }

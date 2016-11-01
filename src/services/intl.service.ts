@@ -1,16 +1,14 @@
-import { Http, Response } from '@angular/http';
 import { Injectable, Optional, EventEmitter } from '@angular/core';
-import { Observable } from "rxjs/Observable";
-import { Observer } from "rxjs/Observer";
-import { IntlLoader, IntlStaticLoader } from './intl.loader';
-import * as format from './format.service';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { IntlLoader } from './intl.loader';
 import { debug } from '../debug';
 
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/share";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/merge";
-import "rxjs/add/operator/toArray";
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/toArray';
 
 export interface LangChangeEvent {
   lang: string;
@@ -72,7 +70,7 @@ export class IntlService {
   }
 
   public start() {
-    if (typeof this.messages[this.defaultLang] === "undefined") {
+    if (typeof this.messages[this.defaultLang] === 'undefined') {
       // not available, ask for it
       this.getTranslation(this.defaultLang);
       if (!this.currentLang) {
@@ -89,12 +87,12 @@ export class IntlService {
   public use(lang: string): Observable<any> {
     let pending: Observable<any>;
     // check if this language is available
-    if (typeof this.messages[lang] === "undefined") {
+    if (typeof this.messages[lang] === 'undefined') {
       // not available, ask for it
       pending = this.getTranslation(lang);
     }
 
-    if (typeof pending !== "undefined") {
+    if (typeof pending !== 'undefined') {
       // on init set the currentLang immediately
       if (!this.currentLang) {
         this.currentLang = lang;
@@ -183,7 +181,7 @@ export class IntlService {
     return Observable.create((observer: Observer<string>) => {
       obs.subscribe((res: string) => {
 
-        if (typeof res === "undefined" && this.defaultLang && this.defaultLang !== this.currentLang) {
+        if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
           res = this.messages[this.defaultLang][key];
 
           if (process.env.NODE_ENV !== 'production') {
@@ -200,7 +198,7 @@ export class IntlService {
         observer.next(res);
         observer.complete();
       });
-    })
+    });
   }
 
   /**
@@ -214,7 +212,7 @@ export class IntlService {
     }
 
     let res = this.messages[this.currentLang][key];
-    if (typeof res === "undefined" && this.defaultLang && this.defaultLang !== this.currentLang) {
+    if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
       res = this.messages[this.defaultLang][key];
 
       if (process.env.NODE_ENV !== 'production') {
@@ -236,7 +234,7 @@ export class IntlService {
       locale: this.currentLang,
       formats: this.defaultFormat,
       defaultLocale: this.defaultLang
-    }
+    };
   }
 
   /**

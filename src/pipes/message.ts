@@ -1,4 +1,4 @@
-import { Pipe, Injectable, ChangeDetectorRef } from '@angular/core';
+import { Pipe, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { IntlService, FormatService } from '../services';
 import { AbstractI18nPipe } from './abstractI18n';
 import { MessageDescriptor } from '../interfaces';
@@ -7,7 +7,7 @@ import { MessageDescriptor } from '../interfaces';
   name: 'formattedMessage',
   pure: false // required to update the value when the promise is resolved
 })
-export class FormattedMessagePipe extends AbstractI18nPipe {
+export class FormattedMessagePipe extends AbstractI18nPipe implements PipeTransform {
 
   constructor(intlService: IntlService, _ref: ChangeDetectorRef, formatService: FormatService) {
     super(intlService, _ref, formatService);
@@ -16,7 +16,7 @@ export class FormattedMessagePipe extends AbstractI18nPipe {
   updateValue(descriptor: string | MessageDescriptor, interpolateParams: any = {}): void {
     let values = interpolateParams.values ? interpolateParams.values : {};
 
-    if (typeof descriptor === "string") {
+    if (typeof descriptor === 'string') {
       descriptor = { id: descriptor };
       if (interpolateParams['defaultMessage']) {
         descriptor.defaultMessage = interpolateParams['defaultMessage'];

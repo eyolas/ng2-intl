@@ -85,11 +85,11 @@ declare module 'intl-messageformat' {
 }
 
 interface Thresholds {
-  second: number,  // seconds to minute
-  minute: number,  // minutes to hour
-  hour: number,  // hours to day
-  day: number,  // days to month
-  month: number   // months to year
+  second: number;  // seconds to minute
+  minute: number;  // minutes to hour
+  hour: number;  // hours to day
+  day: number;  // days to month
+  month: number;   // months to year
 }
 
 declare module 'intl-relativeformat' {
@@ -112,7 +112,7 @@ declare module 'intl-relativeformat' {
 
     __localeData__: { [k: string]: any };
 
-    thresholds: Thresholds
+    thresholds: Thresholds;
   }
 
   const IntlRelativeFormat: IntlRelativeFormatConstructor;
@@ -121,11 +121,11 @@ declare module 'intl-relativeformat' {
 }
 
 declare module 'intl-format-cache' {
-  interface intlFormatCacheFn {
+  interface IntlFormatCacheFn {
     <T>(fn: T): T;
   }
 
-  const IntlFormatCache: intlFormatCacheFn;
+  const IntlFormatCache: IntlFormatCacheFn;
 
   export = IntlFormatCache;
 }

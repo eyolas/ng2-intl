@@ -24,6 +24,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
+    "lint": "tslint src/**/*.ts && tslint 'src/**/*.ts'",
     "clean": "rimraf dist/ lib/ locale-data/ src/en.js src/en.d.ts",
     "prebuild": "npm run clean",
     "build": "npm run build:data && npm run build:dist",

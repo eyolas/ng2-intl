@@ -22,8 +22,8 @@ export interface IntlPluralFormat {
 }
 
 export interface IntlPluralFormatConstructor {
-  new (locales: string | string[], options: { style?: string }): IntlPluralFormat
-  (locales: string | string[], options: { style?: string }): IntlPluralFormat
+  new (locales: string | string[], options: { style?: string }): IntlPluralFormat;
+  (locales: string | string[], options: { style?: string }): IntlPluralFormat;
 }
 
 export class IntlPluralFormatImpl {

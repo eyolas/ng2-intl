@@ -1,4 +1,4 @@
-import { Pipe, Injectable, ChangeDetectorRef } from '@angular/core';
+import { Pipe, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { IntlService, FormatService } from '../services';
 import { AbstractI18nPipe } from './abstractI18n';
 
@@ -6,7 +6,7 @@ import { AbstractI18nPipe } from './abstractI18n';
   name: 'formattedNumber',
   pure: false // required to update the value when the promise is resolved
 })
-export class FormattedNumberPipe extends AbstractI18nPipe {
+export class FormattedNumberPipe extends AbstractI18nPipe implements PipeTransform {
 
   constructor(intlService: IntlService, _ref: ChangeDetectorRef, formatService: FormatService) {
     super(intlService, _ref, formatService);
