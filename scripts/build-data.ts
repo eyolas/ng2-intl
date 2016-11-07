@@ -70,21 +70,21 @@ function writeFile(filename, contents) {
 
 // -----------------------------------------------------------------------------
 
-mkdirpSync('locale-data/');
+mkdirpSync('dist/locale-data/');
 
 const defaultData = createDataModule(cldrDataByLocale.get(DEFAULT_LOCALE));
-writeFile(`src/${DEFAULT_LOCALE}.js`, defaultData);
-writeFile(`src/${DEFAULT_LOCALE}.d.ts`, `
+writeFile(`module/src/${DEFAULT_LOCALE}.js`, defaultData);
+writeFile(`module/src/${DEFAULT_LOCALE}.d.ts`, `
 declare var lang: any;
 export default lang;
 `);
 
 const allData = createDataModule(Array.from(cldrDataByLocale.values()));
-writeUMDFile('locale-data/index.js', allData);
+writeUMDFile('dist/locale-data/index.js', allData);
 
 cldrDataByLang.forEach((data, lang) => {
-    writeUMDFile(`locale-data/${lang}.js`, createDataModule(data));
-    writeFile(`locale-data/${lang}.d.ts`, `
+    writeUMDFile(`dist/locale-data/${lang}.js`, createDataModule(data));
+    writeFile(`dist/locale-data/${lang}.d.ts`, `
 declare var lang: any;
 export default lang;
 `);

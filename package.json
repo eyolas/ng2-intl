@@ -1,6 +1,7 @@
 {
   "name": "ng2-intl",
   "version": "1.0.0-rc.9",
+  "private": true,
   "description": "Internationalize Angular2 apps. This library provides Angular2 components, pipe and an API to format dates, numbers, and strings, including pluralization and handling translations.",
   "keywords": [
     "intl",
@@ -16,21 +17,19 @@
     "translate",
     "translation"
   ],
-  "files": [
-    "dist",
-    "src",
-    "locale-data"
-  ],
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "bundles/ng2-intl.umd.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
-    "lint": "tslint src/**/*.ts && tslint 'src/**/*.ts'",
-    "clean": "rimraf dist/ lib/ locale-data/ src/en.js src/en.d.ts",
+    "lint": "tslint module/**/*.ts && tslint 'module/**/*.ts'",
+    "clean": "rimraf dist/ lib/ locale-data/ module/src/en.ts",
     "prebuild": "npm run clean",
-    "build": "npm run build:data && npm run build:dist",
-    "copy": "cp src/{en.js,en.d.ts} dist/",
+    "copy": "cp module/src/{en.js,en.d.ts} dist/src/",
+    "build": "npm run build:data && npm run build:dist && npm run build:umd && npm run build:files",
     "build:dist": "tsc && npm run copy",
     "build:data": "ts-node -P scripts/tsconfig.json scripts/build-data",
+    "build:umd": "webpack",
+    "build:files": "ts-node -P scripts/tsconfig.json scripts/make-package && cp README.md dist/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run build"
   },
@@ -61,6 +60,7 @@
     "@angular/http": "^2.1.0",
     "@angular/platform-browser": "^2.1.0",
     "@types/node": "^6.0.45",
+    "awesome-typescript-loader": "^2.2.4",
     "codelyzer": "^1.0.0-beta.3",
     "formatjs-extract-cldr-data": "^3.0.0",
     "mkdirp": "^0.5.1",
@@ -72,7 +72,9 @@
     "serialize-javascript": "^1.3.0",
     "ts-node": "^1.6.0",
     "tslint": "^3.15.1",
+    "tslint-loader": "^2.1.5",
     "typescript": "^2.0.3",
+    "webpack": "^2.1.0-beta.25",
     "zone.js": "^0.6.25"
   },
   "optionalDependencies": {
