@@ -31,10 +31,7 @@ module.exports = {
   // require those dependencies but don't bundle them
   externals: [
     /^\@angular\//,
-    /^rxjs\//,
-    /^intl-format-cache/,
-    /^intl-messageformat/,
-    /^intl-relativeformat/
+    /^rxjs\//
   ],
 
   module: {
