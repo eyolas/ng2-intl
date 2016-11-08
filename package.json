@@ -1,6 +1,6 @@
 {
   "name": "ng2-intl",
-  "version": "1.0.0-rc.10",
+  "version": "1.0.0-rc.11",
   "private": true,
   "description": "Internationalize Angular2 apps. This library provides Angular2 components, pipe and an API to format dates, numbers, and strings, including pluralization and handling translations.",
   "keywords": [
