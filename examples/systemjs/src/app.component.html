@@ -1,0 +1,67 @@
+<div class="container">
+	<h2>{{ 'HOME_TITLE' | formattedMessage }}</h2>
+	<div class="wrapper wrapper-content">
+		<div class="row">
+			<select #langSelect (change)="intlService.use(langSelect.value)">
+        <option *ngFor="let lang of intlService.getLangs()" [value]="lang" [selected]="lang === intlService.currentLang">{{ lang }}</option>
+      </select>
+			<br />
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<h2>FormattedMessage</h2>
+				<p>photos : <input type="number" #numPhotos (change)="0" value="0"></p>
+				<p>component :
+					<FormattedMessage id="NUM_PHOTOS" [values]="{numPhotos: numPhotos.value}"></FormattedMessage>
+				</p>
+				<p>pipe : {{ 'NUM_PHOTOS' | formattedMessage:{values: {numPhotos: numPhotos.value} } }}</p>
+			</div>
+			<div class="col-lg-4">
+				<h2>FormattedHtmlMessage</h2>
+				<p>component :
+					<FormattedHtmlMessage id="TEST"></FormattedHtmlMessage>
+				</p>
+			</div>
+			<div title="formattedPlural" class="col-lg-4">
+				<h2>formattedPlural</h2>
+				<p>messages : <input type="number" #msg (change)="0" value="0"></p>
+				<p>component : {{msg.value}}
+					<FormattedPlural [value]="msg.value" one='message' other='messages'></FormattedPlural>
+				</p>
+				<p>pipe : {{msg.value | formattedPlural:{style: 'ordinal'} }}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<h2>formattedDate</h2>
+				<p>component :
+					<FormattedDate [value]="date" [options]="{year: 'numeric',
+            month:'long',
+            day:'numeric',
+            weekday:'long'}"></FormattedDate> <br />
+					<FormattedDate [value]="date"></FormattedDate>
+				</p>
+				<p>pipe : {{date | formattedDate:{year: 'numeric', month:'long', day:'numeric', weekday:'long'} }} <br /> {{date | formattedDate
+					}}
+				</p>
+			</div>
+			<div class="col-lg-4">
+				<h2>FormattedNumber</h2>
+				<p>component :
+					<FormattedNumber value="10000"></FormattedNumber><br />
+					<FormattedNumber [value]="1" [options]="{style: 'percent'}"></FormattedNumber>
+				</p>
+				<p>pipe : {{ 10000 | formattedNumber}}<br /> {{ 1 | formattedNumber:{style: 'percent'} }}<br />
+				</p>
+			</div>
+			<div class="col-lg-4">
+        <h2>FormattedTime</h2>
+				<p>component :
+					<FormattedTime [value]="date"></FormattedTime>
+				</p>
+				<p>pipe : {{ date | formattedTime}}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
