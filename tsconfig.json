@@ -20,7 +20,8 @@
       "es6"
     ],
     "types": [
-      "node"
+      "node",
+      "lodash"
     ]
   },
   "exclude": [

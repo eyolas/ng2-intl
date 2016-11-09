@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { IntlLoader } from './intl.loader';
 import { debug } from '../debug';
+import * as get from 'lodash/get';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/share';
@@ -170,19 +171,19 @@ export class IntlService {
     if (this.pending) {
       obs = Observable.create((observer: Observer<string>) => {
         this.pending.subscribe((res: any) => {
-          observer.next(res[key]);
+          observer.next(get(res, key, res[key]));
           observer.complete();
         });
       });
     } else {
-      obs = Observable.of(this.messages[this.currentLang][key]);
+      obs = Observable.of(get(this.messages[this.currentLang], key, this.messages[this.currentLang][key]));
     }
 
     return Observable.create((observer: Observer<string>) => {
       obs.subscribe((res: string) => {
 
         if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
-          res = this.messages[this.defaultLang][key];
+          res = get(this.messages[this.defaultLang], key, this.messages[this.defaultLang][key]);
 
           if (process.env.NODE_ENV !== 'production') {
             debug(
@@ -211,9 +212,10 @@ export class IntlService {
       throw new Error(`Parameter "key" required`);
     }
 
-    let res = this.messages[this.currentLang][key];
+    let res = get(this.messages[this.currentLang], key, this.messages[this.currentLang][key]);
+
     if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
-      res = this.messages[this.defaultLang][key];
+      res = get(this.messages[this.defaultLang], key, this.messages[this.defaultLang][key]);
 
       if (process.env.NODE_ENV !== 'production') {
         debug(
