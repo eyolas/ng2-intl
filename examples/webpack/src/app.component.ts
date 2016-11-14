@@ -8,6 +8,7 @@ import { IntlService } from 'ng2-intl';
 })
 export class AppComponent {
   date = Date.now();
+  realDate = new Date();
 
   constructor(private intlService: IntlService) {
     intlService.addLangs(['en', 'fr']);

@@ -33,7 +33,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-4">
-				<h2>formattedDate</h2>
+				<h2>formattedDate number</h2>
 				<p>component :
 					<FormattedDate [value]="date" [options]="{year: 'numeric',
             month:'long',
@@ -42,6 +42,17 @@
 					<FormattedDate [value]="date"></FormattedDate>
 				</p>
 				<p>pipe : {{date | formattedDate:{year: 'numeric', month:'long', day:'numeric', weekday:'long'} }} <br /> {{date | formattedDate
+					}}
+				</p>
+        <h2>formattedDate realDate</h2>
+				<p>component :
+					<FormattedDate [value]="realDate" [options]="{year: 'numeric',
+            month:'long',
+            day:'numeric',
+            weekday:'long'}"></FormattedDate> <br />
+					<FormattedDate [value]="realDate"></FormattedDate>
+				</p>
+				<p>pipe : {{realDate | formattedDate:{year: 'numeric', month:'long', day:'numeric', weekday:'long'} }} <br /> {{realDate | formattedDate
 					}}
 				</p>
 			</div>
@@ -55,11 +66,17 @@
 				</p>
 			</div>
 			<div class="col-lg-4">
-        <h2>FormattedTime</h2>
+        <h2>FormattedTime number</h2>
 				<p>component :
 					<FormattedTime [value]="date"></FormattedTime>
 				</p>
 				<p>pipe : {{ date | formattedTime}}
+				</p>
+        <h2>FormattedTime realDate</h2>
+				<p>component :
+					<FormattedTime [value]="realDate"></FormattedTime>
+				</p>
+				<p>pipe : {{ realDate | formattedTime}}
 				</p>
 			</div>
 		</div>
