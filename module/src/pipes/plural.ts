@@ -12,7 +12,11 @@ export class FormattedPluralPipe extends AbstractI18nPipe implements PipeTransfo
     super(intlService, _ref, formatService);
   }
 
-  updateValue(query: string, options?: Object): void {
+  isValidQuery(query: any) {
+    return query && (typeof query === 'string' && query.length > 0);
+  }
+
+  updateValue(query: any, options?: Object): void {
     this.value = this.formatService.formatPlural(query, options);
 
     this.lastKey = query;

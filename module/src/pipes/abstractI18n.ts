@@ -4,7 +4,7 @@ import { MessageDescriptor } from '../interfaces';
 
 export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   value: string = '';
-  lastKey: string | MessageDescriptor;
+  lastKey: any;
   lastParams: any[];
   onLangChange: EventEmitter<LangChangeEvent>;
 
@@ -65,12 +65,15 @@ export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   }
   /* tslint:enable */
 
-  abstract updateValue(key: string | MessageDescriptor, interpolateParams?: Object, options?: Object): void;
+  abstract updateValue(key: any, interpolateParams?: Object, options?: Object): void;
+
+  abstract isValidQuery(query: any): boolean;
 
   transform(query: string | MessageDescriptor, ...args: any[]): any {
-    if (!query || (typeof query === 'string' && query.length === 0) || (typeof query === 'object' && !query.id)) {
+    if (!this.isValidQuery(query)) {
       return query;
     }
+
     // if we ask another time for the same key, return the last value
     if (this.equals(query, this.lastKey) && this.equals(args, this.lastParams)) {
       return this.value;

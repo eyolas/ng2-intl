@@ -49,7 +49,7 @@ export class FormatService {
     const { locale, formats } = this.intlService.getConfig();
     const {format} = options;
 
-    let date = new Date(value);
+    let date = value instanceof Date ? value : new Date(value);
     let defaults = format && getNamedFormat(formats, 'date', format);
     let filteredOptions = filterProps(options, DATE_TIME_FORMAT_OPTIONS, defaults);
 
@@ -70,7 +70,7 @@ export class FormatService {
     const {locale, formats} = this.intlService.getConfig();
     const {format} = options;
 
-    let date = new Date(value);
+    let date  = value instanceof Date ? value : new Date(value);
     let defaults = format && getNamedFormat(formats, 'time', format);
     let filteredOptions = filterProps(options, DATE_TIME_FORMAT_OPTIONS, defaults);
 
@@ -104,7 +104,7 @@ export class FormatService {
     const {formats, locale} = this.intlService.getConfig();
     const {format} = options;
 
-    let date = new Date(value);
+    let date = value instanceof Date ? value : new Date(value);
     let now = new Date();
     let defaults = format && getNamedFormat(formats, 'relative', format);
     let filteredOptions = filterProps(options, RELATIVE_FORMAT_OPTIONS, defaults);

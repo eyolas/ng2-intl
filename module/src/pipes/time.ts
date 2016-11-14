@@ -13,7 +13,11 @@ export class FormattedTimePipe extends AbstractI18nPipe implements PipeTransform
     super(intlService, _ref, formatService);
   }
 
-  updateValue(query: string, options?: Object): void {
+  isValidQuery(query: any) {
+    return query && (query instanceof Date ||  isFinite(query));
+  }
+
+  updateValue(query: number | Date, options?: Object): void {
     this.value = this.formatService.formatTime(query, options);
     this.lastKey = query;
     this._ref.markForCheck();

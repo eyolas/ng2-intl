@@ -13,6 +13,10 @@ export class FormattedMessagePipe extends AbstractI18nPipe implements PipeTransf
     super(intlService, _ref, formatService);
   }
 
+  isValidQuery(query: any) {
+    return query && ((typeof query === 'string' && query.length > 0) || (typeof query === 'object' && query.id));
+  }
+
   updateValue(descriptor: string | MessageDescriptor, interpolateParams: any = {}): void {
     let values = interpolateParams.values ? interpolateParams.values : {};
 

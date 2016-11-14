@@ -12,7 +12,11 @@ export class FormattedNumberPipe extends AbstractI18nPipe implements PipeTransfo
     super(intlService, _ref, formatService);
   }
 
-  updateValue(query: string, options?: Object): void {
+  isValidQuery(query: any) {
+    return query && ((typeof query === 'string' && query.length > 0) || isFinite(query));
+  }
+
+  updateValue(query: any, options?: Object): void {
     this.value = this.formatService.formatNumber(query, options);
     this.lastKey = query;
     this._ref.markForCheck();

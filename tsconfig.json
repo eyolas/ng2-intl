@@ -10,7 +10,7 @@
     "sourceMap": true,
     "strictNullChecks": false,
     "declaration": true,
-     "stripInternal": true,
+    "stripInternal": true,
     "inlineSources": true,
     "baseUrl": "./module",
     "rootDir": "module",
@@ -36,5 +36,7 @@
   },
   "compileOnSave": false,
   "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

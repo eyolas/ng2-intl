@@ -7,7 +7,7 @@ import { AbstractI18nComponent } from './abstractI18n';
   template: `{{result}}`
 })
 export class FormattedDateComponent extends AbstractI18nComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() value: string;
+  @Input() value: Date;
   @Input() options: Object;
 
   constructor(intlService: IntlService, formatService: FormatService) {
