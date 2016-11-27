@@ -218,7 +218,7 @@ export class FormatService {
       }
     } else {
       if (!defaultMessage ||
-        (locale && locale.toLowerCase() !== defaultLocale.toLowerCase())) {
+        (locale && defaultLocale && locale.toLowerCase() !== defaultLocale.toLowerCase())) {
 
         debug(
           `[Ng2 Intl] Missing message: "${id}" for locale: "${locale}"` +
