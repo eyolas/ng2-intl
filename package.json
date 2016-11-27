@@ -64,6 +64,7 @@
     "@types/node": "^6.0.45",
     "awesome-typescript-loader": "^2.2.4",
     "codelyzer": "^1.0.0-beta.3",
+    "cz-conventional-changelog": "^1.2.0",
     "formatjs-extract-cldr-data": "^3.0.0",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.5.4",
@@ -81,5 +82,10 @@
   },
   "optionalDependencies": {
     "debug": "^2.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
