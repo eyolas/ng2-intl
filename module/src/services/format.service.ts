@@ -33,11 +33,9 @@ function getNamedFormat(formats: any, type: string, name: string) {
     return format;
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    debug(
-      `[Ng2 Intl] No ${type} format named: ${name}`
-    );
-  }
+  debug(
+    `[Ng2 Intl] No ${type} format named: ${name}`
+  );
 }
 
 
@@ -56,11 +54,9 @@ export class FormatService {
     try {
       return formatters.getDateTimeFormat(locale, filteredOptions).format(date);
     } catch (e) {
-      if (process.env.NODE_ENV !== 'production') {
-        debug(
-          `[Ng2 Intl] Error formatting date.\n${e}`
-        );
-      }
+      debug(
+        `[Ng2 Intl] Error formatting date.\n${e}`
+      );
     }
 
     return String(date);
@@ -70,7 +66,7 @@ export class FormatService {
     const {locale, formats} = this.intlService.getConfig();
     const {format} = options;
 
-    let date  = value instanceof Date ? value : new Date(value);
+    let date = value instanceof Date ? value : new Date(value);
     let defaults = format && getNamedFormat(formats, 'time', format);
     let filteredOptions = filterProps(options, DATE_TIME_FORMAT_OPTIONS, defaults);
 
@@ -87,11 +83,9 @@ export class FormatService {
     try {
       return formatters.getDateTimeFormat(locale, filteredOptions).format(date);
     } catch (e) {
-      if (process.env.NODE_ENV !== 'production') {
-        debug(
-          `[Ng2 Intl] Error formatting time.\n${e}`
-        );
-      }
+      debug(
+        `[Ng2 Intl] Error formatting time.\n${e}`
+      );
     }
 
     return String(date);
@@ -119,11 +113,9 @@ export class FormatService {
         now: now
       });
     } catch (e) {
-      if (process.env.NODE_ENV !== 'production') {
-        debug(
-          `[Ng2 Intl] Error formatting relative time.\n${e}`
-        );
-      }
+      debug(
+        `[Ng2 Intl] Error formatting relative time.\n${e}`
+      );
     } finally {
       updateRelativeFormatThresholds(oldThresholds);
     }
@@ -141,11 +133,9 @@ export class FormatService {
     try {
       return formatters.getNumberFormat(locale, filteredOptions).format(value);
     } catch (e) {
-      if (process.env.NODE_ENV !== 'production') {
-        debug(
-          `[Ng2 Intl] Error formatting number.\n${e}`
-        );
-      }
+      debug(
+        `[Ng2 Intl] Error formatting number.\n${e}`
+      );
     }
 
     return String(value);
@@ -159,11 +149,9 @@ export class FormatService {
     try {
       return formatters.getPluralFormat.bind(null)(locale, filteredOptions).format(value);
     } catch (e) {
-      if (process.env.NODE_ENV !== 'production') {
-        debug(
-          `[Ng2 Intl] Error formatting plural.\n${e}`
-        );
-      }
+      debug(
+        `[Ng2 Intl] Error formatting plural.\n${e}`
+      );
     }
 
     return 'other';
@@ -189,8 +177,8 @@ export class FormatService {
       id
     } = descriptor;
 
-      let message = this.intlService.get(id);
-      return this.processFormatMessage(message, descriptor, values);
+    let message = this.intlService.get(id);
+    return this.processFormatMessage(message, descriptor, values);
   }
 
   private processFormatMessage(message: string, descriptor: MessageDescriptor, values = {}): string {
@@ -208,7 +196,7 @@ export class FormatService {
 
     // Avoid expensive message formatting for simple messages without values. In
     // development messages will always be formatted in case of missing values.
-    if (!hasValues && process.env.NODE_ENV === 'production') {
+    if (!hasValues) {
       return message || defaultMessage || id;
     }
 
@@ -222,27 +210,20 @@ export class FormatService {
 
         formattedMessage = formatter.format(values);
       } catch (e) {
-        if (process.env.NODE_ENV !== 'production') {
-          debug(
-            `[Ng2 Intl] Error formatting message: "${id}" for locale: "${locale}"` +
-            (defaultMessage ? ', using default message as fallback.' : '') +
-            `\n${e}`
-          );
-        }
+        debug(
+          `[Ng2 Intl] Error formatting message: "${id}" for locale: "${locale}"` +
+          (defaultMessage ? ', using default message as fallback.' : '') +
+          `\n${e}`
+        );
       }
     } else {
-      if (process.env.NODE_ENV !== 'production') {
-        // This prevents warnings from littering the console in development
-        // when no `messages` are passed into the <IntlProvider> for the
-        // default locale, and a default message is in the source.
-        if (!defaultMessage ||
-          (locale && locale.toLowerCase() !== defaultLocale.toLowerCase())) {
+      if (!defaultMessage ||
+        (locale && locale.toLowerCase() !== defaultLocale.toLowerCase())) {
 
-          debug(
-            `[Ng2 Intl] Missing message: "${id}" for locale: "${locale}"` +
-            (defaultMessage ? ', using default message as fallback.' : '')
-          );
-        }
+        debug(
+          `[Ng2 Intl] Missing message: "${id}" for locale: "${locale}"` +
+          (defaultMessage ? ', using default message as fallback.' : '')
+        );
       }
     }
 
@@ -254,22 +235,18 @@ export class FormatService {
 
         formattedMessage = formatter.format(values);
       } catch (e) {
-        if (process.env.NODE_ENV !== 'production') {
-          debug(
-            `[Ng2 Intl] Error formatting the default message for: "${id}"` +
-            `\n${e}`
-          );
-        }
+        debug(
+          `[Ng2 Intl] Error formatting the default message for: "${id}"` +
+          `\n${e}`
+        );
       }
     }
 
     if (!formattedMessage) {
-      if (process.env.NODE_ENV !== 'production') {
-        debug(
-          `[Ng2 Intl] Cannot format message: "${id}", ` +
-          `using message ${message || defaultMessage ? 'source' : 'id'} as fallback.`
-        );
-      }
+      debug(
+        `[Ng2 Intl] Cannot format message: "${id}", ` +
+        `using message ${message || defaultMessage ? 'source' : 'id'} as fallback.`
+      );
     }
 
     return formattedMessage || message || defaultMessage || id;

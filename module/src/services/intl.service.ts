@@ -185,11 +185,9 @@ export class IntlService {
         if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
           res = get(this.messages[this.defaultLang], key, this.messages[this.defaultLang][key]);
 
-          if (process.env.NODE_ENV !== 'production') {
-            debug(
-              `[Ng Intl] Error formatting message: "${key}" for locale: "${this.currentLang}", using default message as fallback.`
-            );
-          };
+          debug(
+            `[Ng Intl] Error formatting message: "${key}" for locale: "${this.currentLang}", using default message as fallback.`
+          );
         }
 
         if (!res && this.missingTranslationHandler) {
@@ -217,11 +215,9 @@ export class IntlService {
     if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
       res = get(this.messages[this.defaultLang], key, this.messages[this.defaultLang][key]);
 
-      if (process.env.NODE_ENV !== 'production') {
-        debug(
-          `[Ng Intl] Error formatting message: "${key}" for locale: "${this.currentLang}", using default message as fallback.`
-        );
-      };
+      debug(
+        `[Ng Intl] Error formatting message: "${key}" for locale: "${this.currentLang}", using default message as fallback.`
+      );
     }
 
     if (!res && this.missingTranslationHandler) {
