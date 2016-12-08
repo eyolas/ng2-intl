@@ -7,12 +7,12 @@
     "start": "webpack-dev-server --inline --progress --port 3000"
   },
   "dependencies": {
-    "@angular/common": "^2.1.2",
-    "@angular/compiler": "2.1.2",
-    "@angular/core": "^2.1.2",
-    "@angular/http": "^2.1.2",
-    "@angular/platform-browser": "^2.1.2",
-    "@angular/platform-browser-dynamic": "^2.1.2",
+    "@angular/common": "^2.3.0",
+    "@angular/compiler": "^2.3.0",
+    "@angular/core": "^2.3.0",
+    "@angular/http": "^2.3.0",
+    "@angular/platform-browser": "^2.3.0",
+    "@angular/platform-browser-dynamic": "^2.3.0",
     "core-js": "2.4.1",
     "ng2-intl": "file:../../dist/",
     "rxjs": "5.0.0-beta.12",
