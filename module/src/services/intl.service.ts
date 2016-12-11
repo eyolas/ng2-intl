@@ -186,19 +186,19 @@ export class IntlService {
     if (this.pending) {
       obs = Observable.create((observer: Observer<string>) => {
         this.pending.subscribe((res: any) => {
-          observer.next(get(res, key, res[key]));
+          observer.next(get(res, key, undefined));
           observer.complete();
         });
       });
     } else {
-      obs = Observable.of(get(this.messages[this.currentLang], key, this.messages[this.currentLang][key]));
+      obs = Observable.of(get(this.messages[this.currentLang], key, undefined));
     }
 
     return Observable.create((observer: Observer<string>) => {
       obs.subscribe((res: string) => {
 
         if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
-          res = get(this.messages[this.defaultLang], key, this.messages[this.defaultLang][key]);
+          res = get(this.messages[this.defaultLang], key, undefined);
 
           debug(
             `[Ng Intl] Error formatting message: "${key}" for locale: "${this.currentLang}", using default message as fallback.`
