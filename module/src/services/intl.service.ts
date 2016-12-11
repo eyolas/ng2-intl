@@ -130,6 +130,21 @@ export class IntlService {
   }
 
   /**
+    * Manually sets an object of translations for a given language
+    * @param lang
+    * @param translations
+    * @param shouldMerge
+    */
+  public setTranslation(lang: string, translations: Object, shouldMerge = false): void {
+    if (shouldMerge && this.messages[lang]) {
+      Object.assign(this.messages[lang], translations);
+    } else {
+      this.messages[lang] = translations;
+    }
+    this.updateLangs();
+  }
+
+  /**
      * Returns an array of currently available langs
      * @returns {any}
      */
