@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { IntlLoader } from './intl.loader';
 import { debug } from '../debug';
-import * as get from 'lodash/get';
+import get from 'lodash/get';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/share';
