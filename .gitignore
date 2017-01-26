@@ -39,3 +39,4 @@ node_modules
 /ng_factory
 /generated
 locale-data
+module/aot

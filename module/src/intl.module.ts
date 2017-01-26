@@ -1,27 +1,27 @@
 import { Http, HttpModule } from '@angular/http';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { IntlService, IntlLoader, IntlStaticLoader, FormatService} from './services';
-import * as pipes from './pipes';
-import * as components from './components';
+import { FormattedDatePipe, FormattedMessagePipe, FormattedNumberPipe, FormattedPluralPipe, FormattedTimePipe } from './pipes';
+import { FormattedDateComponent, FormattedHtmlMessageComponent, FormattedMessageComponent,
+  FormattedNumberComponent, FormattedPluralComponent, FormattedTimeComponent } from './components';
 
 export function i18nLoaderFactory(http: Http) {
   return new IntlStaticLoader(http);
 }
 
-const PIPES: any[] = Object.keys(pipes).map((k: string) => (pipes as any)[k]);
-const COMPONENTS = Object.keys(components).map((k: string) => (components as any)[k]);
-
 @NgModule({
   imports: [HttpModule],
   declarations: [
-    ...PIPES,
-    ...COMPONENTS
+    FormattedDatePipe, FormattedMessagePipe, FormattedNumberPipe, FormattedPluralPipe, FormattedTimePipe,
+    FormattedDateComponent, FormattedHtmlMessageComponent, FormattedMessageComponent, FormattedNumberComponent,
+    FormattedPluralComponent, FormattedTimeComponent
   ],
   providers: [FormatService],
   exports: [
     HttpModule,
-    ...PIPES,
-    ...COMPONENTS
+    FormattedDatePipe, FormattedMessagePipe, FormattedNumberPipe, FormattedPluralPipe, FormattedTimePipe,
+    FormattedDateComponent, FormattedHtmlMessageComponent, FormattedMessageComponent, FormattedNumberComponent,
+    FormattedPluralComponent, FormattedTimeComponent
   ]
 })
 export class IntlModule {

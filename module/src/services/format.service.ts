@@ -201,7 +201,6 @@ export class FormatService {
     }
 
     let formattedMessage: string;
-    let defaultFormattedMessage: string;
 
     if (message) {
       try {
@@ -228,13 +227,13 @@ export class FormatService {
       }
     }
 
-    if (!formattedMessage && defaultMessage) {
+    if (typeof formattedMessage !== 'string' && defaultMessage) {
       try {
         let formatter = formatters.getMessageFormat(
           defaultMessage, defaultLocale, formats
         );
 
-        defaultFormattedMessage = formatter.format(values);
+        formattedMessage = formatter.format(values);
       } catch (e) {
         debug(
           `[Ng2 Intl] Error formatting the default message for: "${id}"` +
@@ -243,18 +242,14 @@ export class FormatService {
       }
     }
 
-    if (!defaultFormattedMessage && typeof formattedMessage !== 'string') {
+    if (typeof formattedMessage !== 'string') {
       debug(
         `[Ng2 Intl] Cannot format message: "${id}", ` +
         `using message ${message || defaultMessage ? 'source' : 'id'} as fallback.`
       );
     }
 
-    if (formattedMessage) {
-      return formattedMessage;
-    }
-
-    return defaultFormattedMessage || typeof formattedMessage === 'string' ? formattedMessage : message || defaultMessage || id;
+    return typeof formattedMessage === 'string' ? formattedMessage : message || defaultMessage || id;
   }
 
   formatHTMLMessage(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): string {
