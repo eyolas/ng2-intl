@@ -30,7 +30,8 @@
     "dist",
     "scripts",
     "config",
-    "tests"
+    "tests",
+    "module/aot"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
@@ -40,5 +41,9 @@
   "buildOnSave": false,
   "atom": {
     "rewriteTsconfig": false
+  },
+  "angularCompilerOptions": {
+    "genDir": "module/aot",
+    "skipMetadataEmit": false
   }
 }
