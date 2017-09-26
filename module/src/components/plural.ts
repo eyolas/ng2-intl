@@ -33,7 +33,7 @@ export class FormattedPluralComponent extends AbstractI18nComponent implements O
       this.options
     );
 
-    let pluralCategory = this.formatService.formatPlural(this.value, props);
+    const pluralCategory = this.formatService.formatPlural(this.value, props);
     this.result = props[pluralCategory] || this.other;
   }
 

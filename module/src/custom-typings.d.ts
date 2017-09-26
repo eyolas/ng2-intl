@@ -121,9 +121,7 @@ declare module 'intl-relativeformat' {
 }
 
 declare module 'intl-format-cache' {
-  interface IntlFormatCacheFn {
-    <T>(fn: T): T;
-  }
+  type IntlFormatCacheFn = <T>(fn: T) => T;
 
   const IntlFormatCache: IntlFormatCacheFn;
 

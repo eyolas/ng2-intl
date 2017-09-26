@@ -30,8 +30,8 @@ export class IntlPluralFormatImpl {
   format: (values?: any) => string;
 
   constructor(locales: string | string[], options: { style?: string } = {}) {
-    let useOrdinal = options.style === 'ordinal';
-    let pluralFn = findPluralFunction(resolveLocale(locales));
+    const useOrdinal = options.style === 'ordinal';
+    const pluralFn = findPluralFunction(resolveLocale(locales));
 
     this.format = (value) => pluralFn(value, useOrdinal);
   }

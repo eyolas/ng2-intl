@@ -11,8 +11,6 @@
     "strictNullChecks": false,
     "declaration": true,
     "stripInternal": true,
-    "baseUrl": "./module",
-    "rootDir": "module",
     "outDir": "dist",
     "lib": [
       "dom",
@@ -35,10 +33,5 @@
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "useWebpackText": true
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
   }
 }

@@ -18,7 +18,7 @@ export class FormattedMessagePipe extends AbstractI18nPipe implements PipeTransf
   }
 
   updateValue(descriptor: string | MessageDescriptor, interpolateParams: any = {}): void {
-    let values = interpolateParams.values ? interpolateParams.values : {};
+    const values = interpolateParams.values ? interpolateParams.values : {};
 
     if (typeof descriptor === 'string') {
       descriptor = { id: descriptor };

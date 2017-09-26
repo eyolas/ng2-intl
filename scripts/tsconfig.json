@@ -9,7 +9,6 @@
     "sourceMap": true,
     "strictNullChecks": false,
     "declaration": true,
-    "rootDir": ".",
     "lib": [
       "dom",
       "es6"
@@ -25,8 +24,5 @@
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "useWebpackText": true
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+  }
 }

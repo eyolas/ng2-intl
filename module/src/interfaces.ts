@@ -12,12 +12,12 @@ export interface DateTimeFormatOptions {
   minute?: 'numeric' | '2-digit';
   second?: 'numeric' | '2-digit';
   timeZoneName?: 'short' | 'long';
-};
+}
 
 export interface RelativeFormatOptions {
   style?: 'best fit' | 'numeric';
   units?: 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year';
-};
+}
 
 export interface NumberFormatOptions {
   localeMatcher?: 'best fit' | 'lookup';
@@ -30,11 +30,11 @@ export interface NumberFormatOptions {
   maximumFractionDigits?: number;
   minimumSignificantDigits?: number;
   maximumSignificantDigits?: number;
-};
+}
 
 export interface PluralFormatOptions {
     style?: 'cardinal' | 'ordinal';
-};
+}
 
 
 export interface MessageDescriptor {

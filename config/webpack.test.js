@@ -22,7 +22,7 @@ module.exports = {
 
     resolve: {
         extensions: ['.ts', '.js'],
-        modules: [helpers.root('src'), 'node_modules']
+        modules: [helpers.root('module'), 'node_modules']
     },
 
     module: {
@@ -63,8 +63,8 @@ module.exports = {
     plugins: [
         // fix the warning in ./~/@angular/core/src/linker/system_js_ng_module_factory_loader.js
         new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-            helpers.root('./src')
+          /angular(\\|\/)core(\\|\/)@angular/,
+            helpers.root('./module')
         ),
 
         new LoaderOptionsPlugin({

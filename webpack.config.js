@@ -3,6 +3,7 @@
  */
 
 const webpack = require('webpack');
+const path =require('path');
 
 /**
  * Webpack Plugins
@@ -21,7 +22,7 @@ module.exports = {
   entry: './module/index.ts',
 
   output: {
-    path: 'dist/bundles',
+    path: path.resolve(__dirname, './dist/bundles'),
     publicPath: '/',
     filename: 'ng2-intl.umd.js',
     libraryTarget: 'umd',
@@ -31,14 +32,15 @@ module.exports = {
   // require those dependencies but don't bundle them
   externals: [
     /^\@angular\//,
-    /^rxjs\//
+    /^rxjs\//,
+    /^lodash-es\//
   ],
 
   module: {
     rules: [{
       enforce: 'pre',
       test: /\.ts$/,
-      loader: 'tslint',
+      loader: 'tslint-loader',
       exclude: ['./node_modules']
     }, {
       test: /\.ts$/,
@@ -50,8 +52,8 @@ module.exports = {
   plugins: [
     // fix the warning in ./~/@angular/core/src/linker/system_js_ng_module_factory_loader.js
     new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      './module'
+      /angular(\\|\/)core(\\|\/)@angular/,
+      path.resolve(__dirname, './module')
     ),
 
     new webpack.LoaderOptionsPlugin({

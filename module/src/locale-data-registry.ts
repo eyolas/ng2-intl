@@ -8,7 +8,7 @@ import IntlMessageFormat from 'intl-messageformat';
 import IntlRelativeFormat from 'intl-relativeformat';
 
 export function addLocaleData(data: any = []) {
-    let locales = Array.isArray(data) ? data : [data];
+    const locales = Array.isArray(data) ? data : [data];
 
     locales.forEach((localeData) => {
         if (localeData && localeData.locale) {
@@ -19,7 +19,7 @@ export function addLocaleData(data: any = []) {
 }
 
 export function hasLocaleData(locale: string): boolean {
-    let localeParts = (locale || '').split('-');
+    const localeParts = (locale || '').split('-');
 
     while (localeParts.length > 0) {
         if (hasIMFAndIRFLocaleData(localeParts.join('-'))) {
@@ -33,7 +33,7 @@ export function hasLocaleData(locale: string): boolean {
 }
 
 function hasIMFAndIRFLocaleData(locale: string): boolean {
-    let normalizedLocale = locale && locale.toLowerCase();
+    const normalizedLocale = locale && locale.toLowerCase();
 
     return !!(
         IntlMessageFormat.__localeData__[normalizedLocale] &&

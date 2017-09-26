@@ -7,7 +7,7 @@ export abstract class AbstractI18nComponent implements OnInit, OnDestroy {
 
   constructor(protected intlService: IntlService, protected formatService: FormatService) { }
 
-  abstract updateValue(): void
+  abstract updateValue(): void;
 
   ngOnInit() {
 

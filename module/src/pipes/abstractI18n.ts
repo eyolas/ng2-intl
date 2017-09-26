@@ -3,7 +3,7 @@ import { IntlService, LangChangeEvent, FormatService } from '../services';
 import { MessageDescriptor } from '../interfaces';
 
 export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
-  value: string = '';
+  value = '';
   lastKey: any;
   lastParams: any[];
   onLangChange: EventEmitter<LangChangeEvent>;

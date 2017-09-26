@@ -17,7 +17,7 @@ export class FormattedMessageComponent extends AbstractI18nComponent implements 
    }
 
   updateValue(): void {
-     let { id, defaultMessage } = this;
+     const { id, defaultMessage } = this;
     this.formatService.formatMessageAsync({ id, defaultMessage }, this.values)
       .subscribe((msg: string) => this.result = msg);
   }
