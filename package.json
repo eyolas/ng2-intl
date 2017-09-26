@@ -51,8 +51,8 @@
   "peerDependencies": {
     "@angular/core": "^4.4.3",
     "@angular/http": "^4.4.3",
-    "rxjs": "^5.4.3",
-    "lodash-es": "^4.17.4"
+    "lodash-es": "^4.17.4",
+    "rxjs": "^5.4.3"
   },
   "devDependencies": {
     "@angular/common": "^4.4.3",
@@ -66,6 +66,7 @@
     "@types/node": "^8.0.30",
     "awesome-typescript-loader": "3.2.3",
     "codelyzer": "^3.2.0",
+    "core-js": "^2.5.1",
     "cz-conventional-changelog": "^2.0.0",
     "formatjs-extract-cldr-data": "^4.0.0",
     "istanbul-instrumenter-loader": "3.0.0",
@@ -78,6 +79,7 @@
     "karma-remap-coverage": "~0.1.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.4",
+    "lodash-es": "^4.17.4",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.5.4",
     "rollup": "^0.50.0",
