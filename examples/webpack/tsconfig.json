@@ -12,10 +12,5 @@
       "dom",
       "es6"
     ]
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": false
   }
 }

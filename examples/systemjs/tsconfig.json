@@ -8,11 +8,8 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "types": [
-      "core-js",
-      "hammerjs",
-      "node"
-    ]
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "suppressImplicitAnyIndexErrors": true
   }
 }
