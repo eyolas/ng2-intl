@@ -3,7 +3,7 @@ import { IntlService, LangChangeEvent, FormatService } from '../services';
 
 export abstract class AbstractI18nComponent implements OnInit, OnDestroy {
   result: string;
-  onLangChange: EventEmitter<LangChangeEvent>;
+  onLangChange: undefined | EventEmitter<LangChangeEvent>;
 
   constructor(protected intlService: IntlService, protected formatService: FormatService) { }
 

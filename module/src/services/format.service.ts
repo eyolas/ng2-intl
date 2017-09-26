@@ -157,12 +157,12 @@ export class FormatService {
     return 'other';
   }
 
-  formatMessageAsync(descriptor: MessageDescriptor, values = {}): Observable<string> {
+  formatMessageAsync(descriptor: MessageDescriptor, values = {}): Observable<undefined | string> {
     const {
       id
     } = descriptor;
 
-    return Observable.create((observer: Observer<string>) => {
+    return Observable.create((observer: Observer<undefined | string>) => {
       this.intlService.getAsync(id)
         .subscribe((message: string) => {
           observer.next(this.processFormatMessage(message, descriptor, values));
@@ -172,7 +172,7 @@ export class FormatService {
   }
 
 
-  formatMessage(descriptor: MessageDescriptor, values = {}): string {
+  formatMessage(descriptor: MessageDescriptor, values = {}): undefined | string {
     const {
       id
     } = descriptor;
@@ -181,7 +181,7 @@ export class FormatService {
     return this.processFormatMessage(message, descriptor, values);
   }
 
-  private processFormatMessage(message: string, descriptor: MessageDescriptor, values = {}): string {
+  private processFormatMessage(message: string, descriptor: MessageDescriptor, values = {}): undefined | string {
     const {
       formats,
       locale,
@@ -200,8 +200,8 @@ export class FormatService {
       return message || defaultMessage || id;
     }
 
-    let formattedMessage: string;
-    let defaultFormattedMessage: string;
+    let formattedMessage: undefined | string;
+    let defaultFormattedMessage: undefined | string;
 
     if (message) {
       try {
@@ -257,12 +257,12 @@ export class FormatService {
     return defaultFormattedMessage || typeof formattedMessage === 'string' ? formattedMessage : message || defaultMessage || id;
   }
 
-  formatHTMLMessage(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): string {
+  formatHTMLMessage(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): undefined | string {
     const escapedValues = this.escapeValues(rawValues);
     return this.formatMessage(descriptor, escapedValues);
   }
 
-  formatHTMLMessageAsync(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): Observable<string> {
+  formatHTMLMessageAsync(descriptor: MessageDescriptor, rawValues: { [k: string]: any } = {}): Observable<undefined | string> {
     const escapedValues = this.escapeValues(rawValues);
     return this.formatMessageAsync(descriptor, escapedValues);
   }

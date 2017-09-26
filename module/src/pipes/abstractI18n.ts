@@ -6,7 +6,7 @@ export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   value = '';
   lastKey: any;
   lastParams: any[];
-  onLangChange: EventEmitter<LangChangeEvent>;
+  onLangChange: undefined | EventEmitter<LangChangeEvent>;
 
   constructor(protected intlService: IntlService, protected _ref: ChangeDetectorRef, protected formatService: FormatService) {
   }
@@ -79,12 +79,12 @@ export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
       return this.value;
     }
 
-    let interpolateParams: Object;
+    let interpolateParams: undefined | Object;
     if (args.length && args[0] !== null && typeof args[0] === 'object' && !Array.isArray(args[0])) {
       interpolateParams = args[0];
     }
 
-    let options: Object;
+    let options: undefined | Object;
     if (args.length && args[1] !== null && typeof args[1] === 'object' && !Array.isArray(args[1])) {
       options = args[1];
     }

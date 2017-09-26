@@ -86,7 +86,7 @@ export class IntlService {
    * @returns {Observable<*>}
    */
   public use(lang: string): Observable<any> {
-    let pending: Observable<any>;
+    let pending: undefined | Observable<any>;
     // check if this language is available
     if (typeof this.messages[lang] === 'undefined') {
       // not available, ask for it
@@ -176,7 +176,7 @@ export class IntlService {
      * @param key
      * @returns {any} the translated key
      */
-  public getAsync(key: string): Observable<string | any> {
+  public getAsync(key: string): Observable<undefined | string | any> {
     if (!key) {
       throw new Error(`Parameter "key" required`);
     }
@@ -184,7 +184,7 @@ export class IntlService {
     let obs: Observable<string | any>;
     // check if we are loading a new translation to use
     if (this.pending) {
-      obs = Observable.create((observer: Observer<string>) => {
+      obs = Observable.create((observer: Observer<undefined | string>) => {
         this.pending.subscribe((res: any) => {
           observer.next(get(res, key, undefined));
           observer.complete();
@@ -194,8 +194,8 @@ export class IntlService {
       obs = Observable.of(get(this.messages[this.currentLang], key, undefined));
     }
 
-    return Observable.create((observer: Observer<string>) => {
-      obs.subscribe((res: string) => {
+    return Observable.create((observer: Observer<undefined | string>) => {
+      obs.subscribe((res: undefined | string) => {
 
         if (typeof res === 'undefined' && this.defaultLang && this.defaultLang !== this.currentLang) {
           res = get(this.messages[this.defaultLang], key, undefined);
