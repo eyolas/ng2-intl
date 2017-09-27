@@ -8,7 +8,6 @@
     var map = {
         'app': 'src',
         'ng2-intl': 'node_modules/ng2-intl',
-        'lodash-es': 'node_modules/lodash',
         '@angular': 'node_modules/@angular',
         'rxjs': 'node_modules/rxjs'
     };
@@ -17,7 +16,6 @@
     var packages = {
         'app': {main: 'bootstrap.js', defaultExtension: 'js'},
         'rxjs': {defaultExtension: 'js'},
-        'lodash-es': {defaultExtension: 'js'},
         'ng2-intl': {main: 'bundles/ng2-intl.umd.js', defaultExtension: 'js'},
     };
 

@@ -32,8 +32,7 @@ module.exports = {
   // require those dependencies but don't bundle them
   externals: [
     /^\@angular\//,
-    /^rxjs\//,
-    /^lodash-es\//
+    /^rxjs\//
   ],
 
   module: {

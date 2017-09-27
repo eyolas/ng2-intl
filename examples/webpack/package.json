@@ -14,7 +14,6 @@
     "@angular/platform-browser": "^4.4.3",
     "@angular/platform-browser-dynamic": "^4.4.3",
     "core-js": "2.5.1",
-    "lodash-es": "^4.17.4",
     "ng2-intl": "file:../../dist",
     "rxjs": "5.4.3",
     "zone.js": "0.8.17"

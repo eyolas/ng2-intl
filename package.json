@@ -30,8 +30,7 @@
     "build:data": "ts-node -P scripts/tsconfig.json scripts/build-data",
     "build:umd": "webpack",
     "build:files": "ts-node -P scripts/tsconfig.json scripts/make-package && cp README.md dist/",
-    "test": "karma start",
-    "prepublish": "npm run build"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
@@ -51,7 +50,6 @@
   "peerDependencies": {
     "@angular/core": "^4.4.3",
     "@angular/http": "^4.4.3",
-    "lodash-es": "^4.17.4",
     "rxjs": "^5.4.3"
   },
   "devDependencies": {
