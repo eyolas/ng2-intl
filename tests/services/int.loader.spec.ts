@@ -1,7 +1,7 @@
 import { Injector } from '@angular/core';
 import {
-  HttpModule
-} from '@angular/http';
+  HttpClientModule
+} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {
   IntlModule,
@@ -30,7 +30,7 @@ describe('IntlLoader', () => {
   it('should be able to provide IntlStaticLoader', () => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule,
+        HttpClientModule,
         IntlModule.forRoot({provide: IntlLoader, useClass: FakeLoader })
       ]
     });
@@ -58,7 +58,7 @@ describe('IntlLoader', () => {
     }
     TestBed.configureTestingModule({
       imports: [
-        HttpModule,
+        HttpClientModule,
         IntlModule.forRoot({ provide: IntlLoader, useClass: CustomLoader })
       ]
     });

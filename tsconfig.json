@@ -23,7 +23,8 @@
       "jasmine",
       "node",
       "lodash"
-    ]
+    ],
+    "strictPropertyInitialization": false
   },
   "exclude": [
     "examples",

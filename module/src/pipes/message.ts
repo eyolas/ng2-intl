@@ -29,10 +29,12 @@ export class FormattedMessagePipe extends AbstractI18nPipe implements PipeTransf
 
     this.formatService
       .formatMessageAsync(descriptor, values)
-      .subscribe((msg: string) => {
-        this.value = msg;
-        this.lastKey = descriptor;
-        this._ref.markForCheck();
+      .subscribe((msg: string | undefined) => {
+        if (typeof msg === 'string') {
+          this.value = msg;
+          this.lastKey = descriptor;
+          this._ref.markForCheck();
+        }
       });
   }
 }

@@ -18,7 +18,11 @@ export class FormattedHtmlMessageComponent extends AbstractI18nComponent impleme
   updateValue(): void {
     const { id, defaultMessage } = this;
     this.formatService.formatHTMLMessageAsync({ id, defaultMessage }, this.values)
-      .subscribe((msg: string) => this.result = msg);
+      .subscribe((msg: string | undefined) => {
+        if (typeof msg === 'string') {
+          this.result = msg;
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {

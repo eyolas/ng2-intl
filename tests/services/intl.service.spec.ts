@@ -1,10 +1,6 @@
 import { Injector } from '@angular/core';
-import {
-  ResponseOptions,
-  Response,
-  XHRBackend,
-  HttpModule
-} from '@angular/http';
+import { XHRBackend } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import {
   IntlModule,
@@ -31,7 +27,7 @@ describe('IntlService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule, IntlModule.forRoot()],
+      imports: [HttpClientModule, IntlModule.forRoot()],
       providers: [{ provide: XHRBackend, useClass: MockBackend }]
     });
     injector = getTestBed();
@@ -204,72 +200,3 @@ describe('IntlService', () => {
     });
   });
 });
-
-// describe('TranslateLoader', () => {
-//     let injector: Injector;
-//     let backend: MockBackend;
-//     let translate: IntlService;
-//     let connection: MockConnection; // this will be set when a new connection is emitted from the backend.
-
-//     var prepare = (_injector: Injector) => {
-//         backend = _injector.get(XHRBackend);
-//         translate = _injector.get(IntlService);
-//         // sets the connection when someone tries to access the backend with an xhr request
-//         backend.connections.subscribe((c: MockConnection) => connection = c);
-//     };
-
-//     it('should be able to provide TranslateStaticLoader', () => {
-//         TestBed.configureTestingModule({
-//             imports: [HttpModule, IntlModule.forRoot()],
-//             providers: [
-//                 {provide: XHRBackend, useClass: MockBackend}
-//             ]
-//         });
-//         injector = getTestBed();
-//         prepare(injector);
-
-//         expect(translate).toBeDefined();
-//         expect(translate.currentLoader).toBeDefined();
-//         expect(translate.currentLoader instanceof TranslateStaticLoader).toBeTruthy();
-
-//         // the lang to use, if the lang isn't available, it will use the current loader to get them
-//         translate.use('en');
-
-//         // this will request the translation from the backend because we use a static files loader for IntlService
-//         translate.getAsync('TEST').subscribe((res: string) => {
-//             expect(res).toEqual('This is a test');
-//         });
-
-//         // mock response after the xhr request, otherwise it will be undefined
-//         mockBackendResponse(connection, '{"TEST": "This is a test"}');
-//     });
-
-//     it('should be able to provide any TranslateLoader', () => {
-//         class CustomLoader implements TranslateLoader {
-//             getTranslation(lang: string): Observable<any> {
-//                 return Observable.of({"TEST": "This is a test"});
-//             }
-//         }
-//         TestBed.configureTestingModule({
-//             imports: [HttpModule, IntlModule.forRoot({provide: TranslateLoader, useClass: CustomLoader})],
-//             providers: [
-//                 {provide: XHRBackend, useClass: MockBackend}
-//             ]
-//         });
-//         injector = getTestBed();
-//         prepare(injector);
-
-//         expect(translate).toBeDefined();
-//         expect(translate.currentLoader).toBeDefined();
-//         expect(translate.currentLoader instanceof CustomLoader).toBeTruthy();
-
-//         // the lang to use, if the lang isn't available, it will use the current loader to get them
-//         translate.use('en');
-
-//         // this will request the translation from the CustomLoader
-//         translate.getAsync('TEST').subscribe((res: string) => {
-//             expect(res).toEqual('This is a test');
-//         });
-//     });
-
-// });

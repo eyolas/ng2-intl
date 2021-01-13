@@ -9,7 +9,8 @@
         'app': 'src',
         'ng2-intl': 'node_modules/ng2-intl',
         '@angular': 'node_modules/@angular',
-        'rxjs': 'node_modules/rxjs'
+        'rxjs': 'node_modules/rxjs',
+        'tslib': 'node_modules/tslib',
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -17,6 +18,8 @@
         'app': {main: 'bootstrap.js', defaultExtension: 'js'},
         'rxjs': {defaultExtension: 'js'},
         'ng2-intl': {main: 'bundles/ng2-intl.umd.js', defaultExtension: 'js'},
+        'tslib': {main: 'tslib.js', defaultExtension: 'js'},
+        '@angular/common/http': {main: '../bundles/common-http.umd.js', defaultExtension: 'js'}
     };
 
     var ngPackageNames = [
