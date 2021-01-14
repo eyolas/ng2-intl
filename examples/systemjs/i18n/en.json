@@ -1,6 +1,6 @@
 {
   "HOME": {
-    "TITLE": "Hello Angular 6 with ng2-intl!"
+    "TITLE": "Hello Angular 7 with ng2-intl!"
   },
   "NUM_PHOTOS": "You have {numPhotos, plural, \n\t=0 {no photos.}\n\t=1 {one photo.}\n\tother {# photos.}\n}",
   "TEST": "<b>Test in english</b>"
