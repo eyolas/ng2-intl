@@ -50,11 +50,11 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@angular/common": "^7.2.16",
-    "@angular/compiler": "^7.2.16",
-    "@angular/core": "^7.2.16",
-    "@angular/platform-browser": "^7.2.16",
-    "@angular/platform-browser-dynamic": "^7.2.16",
+    "@angular/common": "^8.2.14",
+    "@angular/compiler": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@angular/platform-browser": "^8.2.14",
+    "@angular/platform-browser-dynamic": "^8.2.14",
     "@types/jasmine": "^2.5.38",
     "@types/lodash-es": "^4.14.7",
     "@types/node": "^8.0.30",
@@ -88,7 +88,7 @@
     "tslint-loader": "^3.5.3",
     "typescript": "^3.9.7",
     "webpack": "^3.6.0",
-    "zone.js": "^0.8.17"
+    "zone.js": "^0.9.1"
   },
   "optionalDependencies": {
     "debug": "^3.0.1"
