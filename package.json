@@ -43,7 +43,6 @@
   },
   "homepage": "https://github.com/eyolas/ng2-intl#readme",
   "dependencies": {
-    "@angular/cli": "^7.3.10",
     "intl-format-cache": "^2.0.5",
     "intl-messageformat": "^2.1.0",
     "intl-relativeformat": "^2.0.0",
