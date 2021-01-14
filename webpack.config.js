@@ -13,6 +13,9 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 module.exports = {
+
+  mode: 'production',
+
   devtool: 'inline-source-map',
 
   resolve: {
@@ -40,7 +43,7 @@ module.exports = {
       enforce: 'pre',
       test: /\.ts$/,
       loader: 'tslint-loader',
-      exclude: ['./node_modules']
+      exclude: [/node_modules/]
     }, {
       test: /\.ts$/,
       loader: 'awesome-typescript-loader?declaration=false',
