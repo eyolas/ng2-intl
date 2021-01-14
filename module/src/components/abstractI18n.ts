@@ -1,9 +1,10 @@
-import { OnInit, EventEmitter, OnDestroy } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IntlService, LangChangeEvent, FormatService } from '../services';
 
 export abstract class AbstractI18nComponent implements OnInit, OnDestroy {
   result: string;
-  onLangChange: undefined | EventEmitter<LangChangeEvent>;
+  onLangChange: Subscription | undefined;
 
   constructor(protected intlService: IntlService, protected formatService: FormatService) { }
 
