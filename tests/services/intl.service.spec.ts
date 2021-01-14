@@ -1,44 +1,24 @@
-import { Injector } from '@angular/core';
-import { XHRBackend } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
 import {
   IntlModule,
   IntlService,
-  LangChangeEvent,
-  IntlLoader
+  LangChangeEvent
 } from './../../module';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { getTestBed, TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
 
-let translations: any = { TEST: 'This is a test' };
-class FakeLoader implements IntlLoader {
-  getMessages(lang: string): Observable<any> {
-    return Observable.of(translations);
-  }
-}
 
 describe('IntlService', () => {
-  let injector: Injector;
-  let backend: MockBackend;
+  let injector: TestBed;
   let intlService: IntlService;
-  let connection: MockConnection; // this will be set when a new connection is emitted from the backend.
+  let translations: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, IntlModule.forRoot()],
-      providers: [{ provide: XHRBackend, useClass: MockBackend }]
+      imports: [HttpClientTestingModule, IntlModule.forRoot()],
+      providers: [IntlService]
     });
     injector = getTestBed();
     intlService = injector.get(IntlService);
-  });
-
-  afterEach(() => {
-    injector = undefined;
-    backend = undefined;
-    intlService = undefined;
-    connection = undefined;
     translations = { TEST: 'This is a test' };
   });
 
@@ -143,7 +123,6 @@ describe('IntlService', () => {
 
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
-      expect(connection).not.toBeDefined();
       done();
     });
   });
@@ -156,7 +135,6 @@ describe('IntlService', () => {
 
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
-      expect(connection).not.toBeDefined();
       done();
     });
   });
