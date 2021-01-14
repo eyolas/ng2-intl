@@ -16,7 +16,8 @@
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': {main: 'bootstrap.js', defaultExtension: 'js'},
-        'rxjs': {defaultExtension: 'js'},
+        'rxjs': {main: 'index.js', defaultExtension: 'js'},
+        'rxjs/operators': {main: 'index.js', defaultExtension: 'js' },
         'ng2-intl': {main: 'bundles/ng2-intl.umd.js', defaultExtension: 'js'},
         'tslib': {main: 'tslib.js', defaultExtension: 'js'},
         '@angular/common/http': {main: '../bundles/common-http.umd.js', defaultExtension: 'js'}

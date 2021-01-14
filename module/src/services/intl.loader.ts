@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export abstract class IntlLoader {
   abstract getMessages(lang: string): Observable<any>;
