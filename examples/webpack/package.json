@@ -15,17 +15,18 @@
     "core-js": "2.5.1",
     "ng2-intl": "file:./ng2-intl-2.0.0-rc.3.tgz",
     "rxjs": "6.6.3",
-    "zone.js": "0.8.17"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "angular2-template-loader": "0.6.2",
     "awesome-typescript-loader": "3.2.3",
     "html-loader": "0.5.1",
-    "html-webpack-plugin": "2.30.1",
+    "html-webpack-plugin": "4.5",
     "raw-loader": "0.5.1",
     "ts-helpers": "1.1.2",
     "typescript": "3.9.7",
-    "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.11.5"
+    "webpack": "4.46",
+    "webpack-cli": "3.3.5",
+    "webpack-dev-server": "3.11.1"
   }
 }
