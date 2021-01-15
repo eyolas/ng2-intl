@@ -30,7 +30,7 @@ module.exports = {
             enforce: 'pre',
             test: /\.ts$/,
             loader: 'tslint-loader',
-            exclude: [helpers.root('node_modules')]
+            exclude: [helpers.root('node_modules'), /\.spec\.ts$/]
         }, {
             enforce: 'pre',
             test: /\.js$/,

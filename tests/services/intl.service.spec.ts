@@ -10,7 +10,6 @@ import { getTestBed, TestBed } from '@angular/core/testing';
 describe('IntlService', () => {
   let injector: TestBed;
   let intlService: IntlService;
-  let translations: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,7 +18,6 @@ describe('IntlService', () => {
     });
     injector = getTestBed();
     intlService = injector.get(IntlService);
-    translations = { TEST: 'This is a test' };
   });
 
   it('is defined', () => {
@@ -36,8 +34,6 @@ describe('IntlService', () => {
       expect(res).toEqual('This is a test');
     });
 
-    // mock response after the xhr request, otherwise it will be undefined
-    translations = { TEST: 'This is a test', TEST2: 'This is another test' };
 
     // this will request the translation from downloaded translations without making a request to the backend
     intlService.getAsync('TEST2').subscribe((res: string) => {
@@ -51,7 +47,6 @@ describe('IntlService', () => {
     intlService.setDefaultLang('en');
     intlService.setTranslation('en', { TEST: 'This is a test' });
 
-    translations = {};
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
       expect(intlService.getDefaultLang()).toEqual('en');
@@ -60,7 +55,6 @@ describe('IntlService', () => {
 
   it(`should return undefined when it doesn't find a translation`, () => {
     intlService.use('en');
-    translations = {};
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toBeUndefined();
     });
@@ -85,7 +79,7 @@ describe('IntlService', () => {
     intlService.use('en');
 
     expect(() => {
-      intlService.getAsync(undefined);
+      intlService.getAsync(undefined as unknown as string);
     }).toThrowError('Parameter "key" required');
 
     expect(() => {
@@ -93,18 +87,17 @@ describe('IntlService', () => {
     }).toThrowError('Parameter "key" required');
 
     expect(() => {
-      intlService.getAsync(null);
+      intlService.getAsync(null as unknown as string);
     }).toThrowError('Parameter "key" required');
 
     expect(() => {
-      intlService.get(undefined);
+      intlService.get(undefined as unknown as string);
     }).toThrowError('Parameter "key" required');
   });
 
   it('should be able to get translations with nested keys', () => {
     intlService.use('en');
 
-    translations = {'TEST': {'TEST': 'This is a test'}, 'TEST2': {'TEST2': {'TEST2': 'This is another test'}}};
     intlService.getAsync('TEST.TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
     });
