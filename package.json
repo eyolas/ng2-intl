@@ -21,7 +21,7 @@
   "module": "index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "lint": "tslint --type-check --project tsconfig.json 'module/**/*.ts'",
+    "lint": "tslint --project tsconfig.json 'module/**/*.ts'",
     "clean": "rimraf dist/ lib/ locale-data/ module/src/en.ts",
     "prebuild": "npm run clean",
     "copy": "cp module/src/{en.js,en.d.ts} dist/src/",
@@ -43,6 +43,7 @@
   },
   "homepage": "https://github.com/eyolas/ng2-intl#readme",
   "dependencies": {
+    "@types/lodash": "^4.14.167",
     "intl-format-cache": "^2.0.5",
     "intl-messageformat": "^2.1.0",
     "intl-relativeformat": "^2.0.0",
@@ -58,7 +59,7 @@
     "@angular/platform-browser": "^10.2.4",
     "@angular/platform-browser-dynamic": "^10.2.4",
     "@types/jasmine": "^2.5.38",
-    "@types/lodash-es": "^4.14.7",
+    "@types/lodash-es": "^4.17.4",
     "@types/node": "^13.13.40",
     "awesome-typescript-loader": "3.2.3",
     "codelyzer": "^6.0.1",
