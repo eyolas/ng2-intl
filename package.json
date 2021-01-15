@@ -62,7 +62,7 @@
     "@types/node": "^13.13.40",
     "awesome-typescript-loader": "3.2.3",
     "codelyzer": "^6.0.1",
-    "core-js": "^3.8.2",
+    "core-js": "2",
     "cz-conventional-changelog": "^2.0.0",
     "formatjs-extract-cldr-data": "^4.0.0",
     "istanbul-instrumenter-loader": "^3.0.1",
