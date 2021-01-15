@@ -9,6 +9,9 @@ function root(args) {
 }
 
 module.exports = {
+
+  mode: 'production',
+
   resolve: {
     extensions: ['.ts', '.js', '.html']
   },
@@ -35,7 +38,8 @@ module.exports = {
       cached: false,
       colors: true,
       chunks: false
-    }
+    },
+    disableHostCheck: true
   },
 
   output: {
@@ -54,7 +58,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: 'index.html',
-      chunksSortMode: 'dependency'
+      chunksSortMode: 'auto'
     }),
 
     new webpack.optimize.OccurrenceOrderPlugin(true)

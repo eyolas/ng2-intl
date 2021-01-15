@@ -29,7 +29,7 @@ export class IntlModule {
     provide: IntlLoader,
     useFactory: i18nLoaderFactory,
     deps: [HttpClient]
-  }): ModuleWithProviders {
+  }): ModuleWithProviders<IntlModule> {
     return {
       ngModule: IntlModule,
       providers: [providedLoader, IntlService]
