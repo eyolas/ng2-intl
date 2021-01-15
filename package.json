@@ -51,7 +51,6 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@angular-devkit/schematics": "^9.1.13",
     "@angular/animations": "^10.2.4",
     "@angular/common": "^10.2.4",
     "@angular/compiler": "^10.2.4",
