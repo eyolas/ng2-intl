@@ -19,7 +19,11 @@ export class FormattedMessageComponent extends AbstractI18nComponent implements 
   updateValue(): void {
      const { id, defaultMessage } = this;
     this.formatService.formatMessageAsync({ id, defaultMessage }, this.values)
-      .subscribe((msg: string) => this.result = msg);
+      .subscribe((msg: string | undefined) => {
+        if (typeof msg === 'string') {
+          this.result = msg;
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {

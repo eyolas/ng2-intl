@@ -1,15 +1,9 @@
+import { of as observableOf, Observable, Observer } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { Injectable, Optional, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 import { IntlLoader } from './intl.loader';
 import { debug } from '../debug';
 import get from 'lodash-es/get';
-
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/share';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/merge';
-import 'rxjs/add/operator/toArray';
 
 export interface LangChangeEvent {
   lang: string;
@@ -106,7 +100,7 @@ export class IntlService {
     } else { // we have this language, return an Observable
       this.changeLang(lang);
 
-      return Observable.of(this.messages[lang]);
+      return observableOf(this.messages[lang]);
     }
   }
 
@@ -116,7 +110,7 @@ export class IntlService {
    * @returns {Observable<*>}
    */
   public getTranslation(lang: string): Observable<any> {
-    this.pending = this.currentLoader.getMessages(lang).share();
+    this.pending = this.currentLoader.getMessages(lang).pipe(share());
     this.pending.subscribe((res: Object) => {
       this.messages[lang] = res;
       this.updateLangs();
@@ -191,7 +185,7 @@ export class IntlService {
         });
       });
     } else {
-      obs = Observable.of(get(this.messages[this.currentLang], key, undefined));
+      obs = observableOf(get(this.messages[this.currentLang], key, undefined));
     }
 
     return Observable.create((observer: Observer<undefined | string>) => {

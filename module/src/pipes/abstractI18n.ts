@@ -1,12 +1,13 @@
-import { PipeTransform, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { PipeTransform, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { IntlService, LangChangeEvent, FormatService } from '../services';
 import { MessageDescriptor } from '../interfaces';
+import { Subscription } from 'rxjs';
 
 export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   value = '';
   lastKey: any;
   lastParams: any[];
-  onLangChange: undefined | EventEmitter<LangChangeEvent>;
+  onLangChange: undefined | Subscription;
 
   constructor(protected intlService: IntlService, protected _ref: ChangeDetectorRef, protected formatService: FormatService) {
   }

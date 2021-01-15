@@ -38,19 +38,17 @@ It is recommended to import `IntlModule.forRoot()` in the NgModule of your appli
 
 The `forRoot` method is a convention for modules that provide a singleton service (such as the Angular 2 Router), you can also use it to configure the `IntlModule` loader. By default it will use the `IntlStaticLoader`, but you can provide another loader instead as a parameter of this method (see below [Write & use your own loader](#write--use-your-own-loader)).
 
-For now ng2-intl requires HttpModule from `@angular/http` (this will change soon).
-
 
 ```ts
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import {IntlModule} from 'ng2-intl';
 
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule,
+        HttpClientModule,
         IntlModule.forRoot()
     ],
     bootstrap: [AppComponent]
@@ -65,10 +63,10 @@ If you have multiple NgModules and you use one as a shared NgModule (that you im
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule,
+        HttpClientModule,
         IntlModule.forRoot()
     ],
-    exports: [BrowserModule, HttpModule, IntlModule],
+    exports: [BrowserModule, HttpClientModule, IntlModule],
 })
 export class SharedModule {
 }
@@ -80,14 +78,14 @@ By default, only the `IntlStaticLoader` is available. It will search for files i
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule,
+        HttpClientModule,
         IntlModule.forRoot({ 
           provide: IntlLoader,
-          useFactory: (http: Http) => new IntlStaticLoader(http, '/assets/i18n', '.json'),
-          deps: [Http]
+          useFactory: (http: HttpClient) => new IntlStaticLoader(http, '/assets/i18n', '.json'),
+          deps: [HttpClient]
         })
     ],
-    exports: [BrowserModule, HttpModule, IntlModule],
+    exports: [BrowserModule, HttpClientModule, IntlModule],
 })
 export class SharedModule {
 }

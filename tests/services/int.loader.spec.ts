@@ -1,13 +1,10 @@
 import { Injector } from '@angular/core';
-import {
-  HttpModule
-} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { HttpClientModule } from '@angular/common/http';
+import { of, Observable } from 'rxjs';
 import {
   IntlModule,
   IntlService,
-  IntlLoader,
-  IntlStaticLoader
+  IntlLoader
 } from './../../module';
 
 import { getTestBed, TestBed } from '@angular/core/testing';
@@ -15,7 +12,7 @@ import { getTestBed, TestBed } from '@angular/core/testing';
 const translations: any = { TEST: 'This is a test' };
 class FakeLoader implements IntlLoader {
   getMessages(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
 }
 
@@ -30,7 +27,7 @@ describe('IntlLoader', () => {
   it('should be able to provide IntlStaticLoader', () => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule,
+        HttpClientModule,
         IntlModule.forRoot({provide: IntlLoader, useClass: FakeLoader })
       ]
     });
@@ -53,12 +50,12 @@ describe('IntlLoader', () => {
   it('should be able to provide any IntlLoader', () => {
     class CustomLoader implements IntlLoader {
       getMessages(lang: string): Observable<any> {
-        return Observable.of({ TEST: 'This is a test' });
+        return of({ TEST: 'This is a test' });
       }
     }
     TestBed.configureTestingModule({
       imports: [
-        HttpModule,
+        HttpClientModule,
         IntlModule.forRoot({ provide: IntlLoader, useClass: CustomLoader })
       ]
     });
