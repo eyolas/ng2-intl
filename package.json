@@ -74,7 +74,7 @@
     "karma-mocha-reporter": "^2.1.0",
     "karma-remap-coverage": "~0.1.2",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.4",
+    "karma-webpack": "^2.0.13",
     "lodash-es": "^4.17.4",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.5.4",
