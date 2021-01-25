@@ -169,13 +169,6 @@ export class IntlService {
   }
 
   /**
-   * Update the list of available langs
-   */
-  private updateLangs(): void {
-    this.addLangs(Object.keys(this.messages));
-  }
-
-  /**
    * Gets the message of a key
    * @param key
    * @returns {any} the translated key
@@ -267,6 +260,13 @@ export class IntlService {
       formats: this.defaultFormat,
       defaultLocale: this.defaultLang,
     };
+  }
+
+  /**
+   * Update the list of available langs
+   */
+  private updateLangs(): void {
+    this.addLangs(Object.keys(this.messages));
   }
 
   /**

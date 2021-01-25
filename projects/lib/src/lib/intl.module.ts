@@ -37,7 +37,8 @@ export function i18nLoaderFactory(http: HttpClient) {
     FormattedHtmlMessageComponent,
     FormattedNumberComponent,
     FormattedPluralComponent,
-    FormattedTimeComponent],
+    FormattedTimeComponent,
+  ],
   providers: [FormatService],
   exports: [
     HttpClientModule,
@@ -51,7 +52,8 @@ export function i18nLoaderFactory(http: HttpClient) {
     FormattedHtmlMessageComponent,
     FormattedNumberComponent,
     FormattedPluralComponent,
-    FormattedTimeComponent],
+    FormattedTimeComponent,
+  ],
 })
 export class IntlModule {
   static forRoot(

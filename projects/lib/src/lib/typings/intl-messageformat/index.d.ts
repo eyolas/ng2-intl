@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 declare module 'intl-messageformat' {
   interface IntlMessageFormat {
     format(values?: any): string;
@@ -71,6 +72,9 @@ declare module 'intl-messageformat' {
   }
 
   interface IntlMessageFormatConstructor {
+    __addLocaleData: (localStorage: any) => void;
+    __localeData__: { [k: string]: any };
+
     new <T>(
       message: string,
       locales?: string | string[],
@@ -82,9 +86,6 @@ declare module 'intl-messageformat' {
       locales?: string | string[],
       formats?: IntlMessageFormatOptions
     ): IntlMessageFormat;
-
-    __addLocaleData: (localStorage: any) => void;
-    __localeData__: { [k: string]: any };
   }
 
   const IntlMessageFormat: IntlMessageFormatConstructor;

@@ -12,8 +12,6 @@ export abstract class AbstractI18nComponent implements OnInit, OnDestroy {
     protected formatService: FormatService
   ) {}
 
-  abstract updateValue(): void;
-
   ngOnInit() {
     // set the value
     this.updateValue();
@@ -45,4 +43,6 @@ export abstract class AbstractI18nComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._dispose();
   }
+
+  abstract updateValue(): void;
 }

@@ -1,3 +1,2 @@
-
-declare var lang: any;
+declare let lang: any;
 export default lang;

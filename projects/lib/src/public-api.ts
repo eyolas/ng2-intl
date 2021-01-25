@@ -21,4 +21,4 @@ export * from './lib/locale-data-registry';
 
 export * from './lib/interfaces';
 
-export {IntlModule} from './lib/intl.module';
+export { IntlModule } from './lib/intl.module';

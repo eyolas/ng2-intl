@@ -206,6 +206,22 @@ export class FormatService {
     return this.processFormatMessage(message, descriptor, values);
   }
 
+  formatHTMLMessage(
+    descriptor: MessageDescriptor,
+    rawValues: { [k: string]: any } = {}
+  ): undefined | string {
+    const escapedValues = this.escapeValues(rawValues);
+    return this.formatMessage(descriptor, escapedValues);
+  }
+
+  formatHTMLMessageAsync(
+    descriptor: MessageDescriptor,
+    rawValues: { [k: string]: any } = {}
+  ): Observable<undefined | string> {
+    const escapedValues = this.escapeValues(rawValues);
+    return this.formatMessageAsync(descriptor, escapedValues);
+  }
+
   private processFormatMessage(
     message: string,
     descriptor: MessageDescriptor,
@@ -284,22 +300,6 @@ export class FormatService {
     return defaultFormattedMessage || typeof formattedMessage === 'string'
       ? formattedMessage
       : message || defaultMessage || id;
-  }
-
-  formatHTMLMessage(
-    descriptor: MessageDescriptor,
-    rawValues: { [k: string]: any } = {}
-  ): undefined | string {
-    const escapedValues = this.escapeValues(rawValues);
-    return this.formatMessage(descriptor, escapedValues);
-  }
-
-  formatHTMLMessageAsync(
-    descriptor: MessageDescriptor,
-    rawValues: { [k: string]: any } = {}
-  ): Observable<undefined | string> {
-    const escapedValues = this.escapeValues(rawValues);
-    return this.formatMessageAsync(descriptor, escapedValues);
   }
 
   private escapeValues(rawValues: { [k: string]: any } = {}) {
