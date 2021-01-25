@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "esnext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -11,12 +11,6 @@
     "lib": [
       "dom",
       "es6"
-    ],
-    // "baseUrl": "./src",
-    // "paths": {
-    //   "@angular/*": [
-    //     "../../node_modules/@angular/*"
-    //   ]
-    // },
+    ]
   }
 }

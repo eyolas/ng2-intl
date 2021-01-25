@@ -26,14 +26,21 @@
     "zone.js": "^0.10.3"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.4",
     "@types/node": "^8.0.31",
     "canonical-path": "0.0.2",
     "concurrently": "^3.5.0",
+    "core-js": "2",
     "http-server": "^0.12.3",
+    "intl-format-cache": "2.0.5",
+    "intl-messageformat": "2.1.0",
+    "intl-relativeformat": "2.0.0",
     "jasmine-core": "~2.8.0",
     "lite-server": "^2.2.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.20",
+    "lodash-es": "^4.17.20",
     "rimraf": "^2.5.2",
+    "systemjs-plugin-babel": "^0.0.25",
     "typescript": "3.9.7"
   },
   "repository": {}

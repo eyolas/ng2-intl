@@ -11,6 +11,14 @@
         '@angular': 'node_modules/@angular',
         'rxjs': 'node_modules/rxjs',
         'tslib': 'node_modules/tslib',
+        'intl-relativeformat': 'node_modules/intl-relativeformat',
+        'intl-messageformat-parser': 'node_modules/intl-messageformat-parser',
+        'intl-messageformat': 'node_modules/intl-messageformat',
+        'intl-format-cache': 'node_modules/intl-format-cache',
+        'lodash-es': 'node_modules/lodash-es',
+        'lodash': 'node_modules/lodash',
+        'plugin-babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
+        'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-browser.js'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -20,7 +28,13 @@
         'rxjs/operators': {main: 'index.js', defaultExtension: 'js' },
         'ng2-intl': {main: 'bundles/ng2-intl.umd.js', defaultExtension: 'js'},
         'tslib': {main: 'tslib.js', defaultExtension: 'js'},
-        '@angular/common/http': {main: '../bundles/common-http.umd.js', defaultExtension: 'js'}
+        '@angular/common/http': {main: '../bundles/common-http.umd.js', defaultExtension: 'js'},
+        'lodash-es': {main: 'index.js', defaultExtension: 'js'},
+        'intl-relativeformat': {main: 'index.js', defaultExtension: 'js'},
+        'intl-messageformat': {main: 'index.js', defaultExtension: 'js'},
+        'intl-messageformat-parser': {main: 'index.js', defaultExtension: 'js'},
+        'intl-format-cache': {main: 'index.js', defaultExtension: 'js'}
+
     };
 
     var ngPackageNames = [
@@ -50,7 +64,7 @@
     var config = {
         map: map,
         packages: packages,
-        transpiler: 'transpiler-module'
+        transpiler: 'plugin-babel'
     };
 
     System.config(config);

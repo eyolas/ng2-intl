@@ -17,17 +17,15 @@
     "translate",
     "translation"
   ],
-  "files": [
-    "dist"
-  ],
+  "main": "bundles/ng2-intl.umd.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
-    "ng": "ng",
-    "build": "ng build lib",
-    "lint": "tslint --project tsconfig.json 'projects/**/*.ts'",
+    "lint": "tslint --project tsconfig.json 'module/**/*.ts'",
     "clean": "rimraf dist/ lib/ locale-data/ module/src/en.ts",
     "prebuild": "npm run clean",
     "copy": "cp module/src/{en.js,en.d.ts} dist/src/",
-    "build_old": "npm run build:data && npm run build:dist && npm run build:umd && npm run build:files",
+    "build": "npm run build:data && npm run build:dist && npm run build:umd && npm run build:files",
     "build:dist": "tsc && npm run copy",
     "build:data": "ts-node -P scripts/tsconfig.json scripts/build-data",
     "build:umd": "webpack",
@@ -51,13 +49,7 @@
     "intl-relativeformat": "^2.0.0",
     "rxjs-compat": "^6.0.0-rc.0"
   },
-  "peerDependencies": {
-    "@types/lodash": "^4.14.167",
-    "intl-format-cache": "^2.0.5",
-    "intl-messageformat": "^2.1.0",
-    "intl-relativeformat": "^2.0.0",
-    "rxjs-compat": "^6.0.0-rc.0"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1002",
     "@angular-devkit/build-ng-packagr": "0.1002",
