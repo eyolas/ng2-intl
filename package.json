@@ -35,7 +35,8 @@
     "lint": "eslint -c .eslintrc.js --ext .ts projects",
     "prepublishOnly": "publish-please guard",
     "prettier": "prettier --single-quote --write --parser typescript \"projects/lib/src/**/*.ts\"",
-    "test": "karma start"
+    "test": "karma start",
+    "publish-please": "publish-please"
   },
   "repository": {
     "type": "git",
@@ -94,6 +95,7 @@
     "lodash-es": "^4.17.4",
     "ng-packagr": "10",
     "prettier": "^2.2.1",
+    "publish-please": "^5.5.2",
     "rimraf": "^2.5.4",
     "rxjs": "^6.6.3",
     "source-map-loader": "0.2.1",
