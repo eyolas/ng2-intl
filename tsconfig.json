@@ -43,6 +43,9 @@
     "config",
     "tests"
   ],
+  "include": [
+    "projects/**/*"
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

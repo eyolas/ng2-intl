@@ -2,7 +2,7 @@ import {
   IntlModule,
   IntlService,
   LangChangeEvent
-} from './../../module';
+} from './../../projects/lib/src/public-api';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { getTestBed, TestBed } from '@angular/core/testing';
 

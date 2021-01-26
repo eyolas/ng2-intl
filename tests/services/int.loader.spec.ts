@@ -5,7 +5,7 @@ import {
   IntlModule,
   IntlService,
   IntlLoader
-} from './../../module';
+} from './../../projects/lib/src/public-api';
 
 import { getTestBed, TestBed } from '@angular/core/testing';
 
