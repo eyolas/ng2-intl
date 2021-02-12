@@ -1,11 +1,12 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable guard-for-in */
-import { PipeTransform, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { PipeTransform, OnDestroy, ChangeDetectorRef, Injectable } from '@angular/core';
 import { IntlService, LangChangeEvent } from '../services/intl.service';
 import { FormatService } from '../services/format.service';
 import { MessageDescriptor } from '../interfaces';
 import { Subscription } from 'rxjs';
 
+@Injectable()
 export abstract class AbstractI18nPipe implements PipeTransform, OnDestroy {
   value = '';
   lastKey: any;
