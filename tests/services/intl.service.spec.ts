@@ -1,49 +1,23 @@
-import { Injector } from '@angular/core';
-import {
-  ResponseOptions,
-  Response,
-  XHRBackend,
-  HttpModule
-} from '@angular/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
 import {
   IntlModule,
   IntlService,
-  LangChangeEvent,
-  IntlLoader
-} from './../../module';
-
+  LangChangeEvent
+} from './../../projects/lib/src/public-api';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { getTestBed, TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
 
-let translations: any = { TEST: 'This is a test' };
-class FakeLoader implements IntlLoader {
-  getMessages(lang: string): Observable<any> {
-    return Observable.of(translations);
-  }
-}
 
 describe('IntlService', () => {
-  let injector: Injector;
-  let backend: MockBackend;
+  let injector: TestBed;
   let intlService: IntlService;
-  let connection: MockConnection; // this will be set when a new connection is emitted from the backend.
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule, IntlModule.forRoot()],
-      providers: [{ provide: XHRBackend, useClass: MockBackend }]
+      imports: [HttpClientTestingModule, IntlModule.forRoot()],
+      providers: [IntlService]
     });
     injector = getTestBed();
     intlService = injector.get(IntlService);
-  });
-
-  afterEach(() => {
-    injector = undefined;
-    backend = undefined;
-    intlService = undefined;
-    connection = undefined;
-    translations = { TEST: 'This is a test' };
   });
 
   it('is defined', () => {
@@ -60,8 +34,6 @@ describe('IntlService', () => {
       expect(res).toEqual('This is a test');
     });
 
-    // mock response after the xhr request, otherwise it will be undefined
-    translations = { TEST: 'This is a test', TEST2: 'This is another test' };
 
     // this will request the translation from downloaded translations without making a request to the backend
     intlService.getAsync('TEST2').subscribe((res: string) => {
@@ -75,7 +47,6 @@ describe('IntlService', () => {
     intlService.setDefaultLang('en');
     intlService.setTranslation('en', { TEST: 'This is a test' });
 
-    translations = {};
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
       expect(intlService.getDefaultLang()).toEqual('en');
@@ -84,7 +55,6 @@ describe('IntlService', () => {
 
   it(`should return undefined when it doesn't find a translation`, () => {
     intlService.use('en');
-    translations = {};
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toBeUndefined();
     });
@@ -109,7 +79,7 @@ describe('IntlService', () => {
     intlService.use('en');
 
     expect(() => {
-      intlService.getAsync(undefined);
+      intlService.getAsync(undefined as unknown as string);
     }).toThrowError('Parameter "key" required');
 
     expect(() => {
@@ -117,18 +87,17 @@ describe('IntlService', () => {
     }).toThrowError('Parameter "key" required');
 
     expect(() => {
-      intlService.getAsync(null);
+      intlService.getAsync(null as unknown as string);
     }).toThrowError('Parameter "key" required');
 
     expect(() => {
-      intlService.get(undefined);
+      intlService.get(undefined as unknown as string);
     }).toThrowError('Parameter "key" required');
   });
 
   it('should be able to get translations with nested keys', () => {
     intlService.use('en');
 
-    translations = {'TEST': {'TEST': 'This is a test'}, 'TEST2': {'TEST2': {'TEST2': 'This is another test'}}};
     intlService.getAsync('TEST.TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
     });
@@ -147,7 +116,6 @@ describe('IntlService', () => {
 
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
-      expect(connection).not.toBeDefined();
       done();
     });
   });
@@ -160,7 +128,6 @@ describe('IntlService', () => {
 
     intlService.getAsync('TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
-      expect(connection).not.toBeDefined();
       done();
     });
   });
@@ -204,72 +171,3 @@ describe('IntlService', () => {
     });
   });
 });
-
-// describe('TranslateLoader', () => {
-//     let injector: Injector;
-//     let backend: MockBackend;
-//     let translate: IntlService;
-//     let connection: MockConnection; // this will be set when a new connection is emitted from the backend.
-
-//     var prepare = (_injector: Injector) => {
-//         backend = _injector.get(XHRBackend);
-//         translate = _injector.get(IntlService);
-//         // sets the connection when someone tries to access the backend with an xhr request
-//         backend.connections.subscribe((c: MockConnection) => connection = c);
-//     };
-
-//     it('should be able to provide TranslateStaticLoader', () => {
-//         TestBed.configureTestingModule({
-//             imports: [HttpModule, IntlModule.forRoot()],
-//             providers: [
-//                 {provide: XHRBackend, useClass: MockBackend}
-//             ]
-//         });
-//         injector = getTestBed();
-//         prepare(injector);
-
-//         expect(translate).toBeDefined();
-//         expect(translate.currentLoader).toBeDefined();
-//         expect(translate.currentLoader instanceof TranslateStaticLoader).toBeTruthy();
-
-//         // the lang to use, if the lang isn't available, it will use the current loader to get them
-//         translate.use('en');
-
-//         // this will request the translation from the backend because we use a static files loader for IntlService
-//         translate.getAsync('TEST').subscribe((res: string) => {
-//             expect(res).toEqual('This is a test');
-//         });
-
-//         // mock response after the xhr request, otherwise it will be undefined
-//         mockBackendResponse(connection, '{"TEST": "This is a test"}');
-//     });
-
-//     it('should be able to provide any TranslateLoader', () => {
-//         class CustomLoader implements TranslateLoader {
-//             getTranslation(lang: string): Observable<any> {
-//                 return Observable.of({"TEST": "This is a test"});
-//             }
-//         }
-//         TestBed.configureTestingModule({
-//             imports: [HttpModule, IntlModule.forRoot({provide: TranslateLoader, useClass: CustomLoader})],
-//             providers: [
-//                 {provide: XHRBackend, useClass: MockBackend}
-//             ]
-//         });
-//         injector = getTestBed();
-//         prepare(injector);
-
-//         expect(translate).toBeDefined();
-//         expect(translate.currentLoader).toBeDefined();
-//         expect(translate.currentLoader instanceof CustomLoader).toBeTruthy();
-
-//         // the lang to use, if the lang isn't available, it will use the current loader to get them
-//         translate.use('en');
-
-//         // this will request the translation from the CustomLoader
-//         translate.getAsync('TEST').subscribe((res: string) => {
-//             expect(res).toEqual('This is a test');
-//         });
-//     });
-
-// });

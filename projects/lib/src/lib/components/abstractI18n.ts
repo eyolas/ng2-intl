@@ -1,0 +1,48 @@
+import { OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { IntlService, LangChangeEvent } from '../services/intl.service';
+import { FormatService } from '../services/format.service';
+
+export abstract class AbstractI18nComponent implements OnInit, OnDestroy {
+  result: string;
+  onLangChange: Subscription | undefined;
+
+  constructor(
+    protected intlService: IntlService,
+    protected formatService: FormatService
+  ) {}
+
+  ngOnInit() {
+    // set the value
+    this.updateValue();
+
+    // if there is a subscription to onLangChange, clean it
+    this._dispose();
+
+    // subscribe to onLangChange event, in case the language changes
+    if (!this.onLangChange) {
+      this.onLangChange = this.intlService.onLangChange.subscribe(
+        (event: LangChangeEvent) => {
+          this.updateValue();
+        }
+      );
+    }
+  }
+
+  /**
+   * Clean any existing subscription to change events
+   * @private
+   */
+  _dispose(): void {
+    if (typeof this.onLangChange !== 'undefined') {
+      this.onLangChange.unsubscribe();
+      this.onLangChange = undefined;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this._dispose();
+  }
+
+  abstract updateValue(): void;
+}

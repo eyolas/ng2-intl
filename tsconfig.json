@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -15,6 +16,9 @@
     "stripInternal": true,
     "skipLibCheck": true,
     "outDir": "dist",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
       "dom",
       "es6"
@@ -23,7 +27,13 @@
       "jasmine",
       "node",
       "lodash"
-    ]
+    ],
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@sword/ng2-intl": [
+        "dist/lib"
+      ]
+    }
   },
   "exclude": [
     "examples",
@@ -33,8 +43,11 @@
     "config",
     "tests"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
+  "include": [
+    "projects/**/*"
+  ],
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }

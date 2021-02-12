@@ -1,0 +1,12 @@
+{
+  "name": "ng2-intl",
+  "version": "false",
+  "globalDependencies": {
+    "intl-format-cache": "file:./lib/typings/intl-format-cache",
+    "intl-messageformat": "file:./lib/typings/intl-messageformat",
+    "intl-relativeformat": "file:./lib/typings/intl-relativeformat"
+  },
+  "dependencies": {
+    "debug": "registry:npm/debug#2.0.0+20170504163145"
+  }
+}
