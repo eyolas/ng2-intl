@@ -1,5 +1,5 @@
 {
-    "name": "ng2-intl",
+    "name": "@sword/ng2-intl",
     "version": "3.0.1",
     "description": "Internationalize Angular2 apps. This library provides Angular2 components, pipe and an API to format dates, numbers, and strings, including pluralization and handling translations.",
     "author": "David Touzet <dtouzet@gmail.com>",
